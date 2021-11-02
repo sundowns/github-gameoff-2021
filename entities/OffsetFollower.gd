@@ -10,7 +10,6 @@ export var offset: Vector3
 
 func _ready():
 	set_follow_target(get_node(follow_target_path))
-	print(target)
 
 func set_follow_target(_target: Node):
 	target = _target
