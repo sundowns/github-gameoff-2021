@@ -6,4 +6,7 @@
 follow_target_path = NodePath("../Companion/Player")
 
 [node name="Sprite3D" parent="." index="1"]
-modulate = Color( 0.129412, 0.682353, 0.027451, 1 )
+modulate = Color( 0.45098, 0.313726, 0.462745, 1 )
+
+[node name="Shadow" parent="." index="4"]
+transform = Transform( 0.15, 0, 0, 0, -6.55671e-09, -1, 0, 0.15, -4.37114e-08, 0, 0, 0 )

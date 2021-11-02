@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://sprites/shadow.png" type="Texture" id=1]
+[ext_resource path="res://player/Shadow.gd" type="Script" id=2]
+
+[node name="Shadow" type="Sprite3D"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
+cast_shadow = 0
+shaded = true
+alpha_cut = 2
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="RayCast" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5.51025e-08, -1.2606 )
+enabled = true
+cast_to = Vector3( 0, 0, 100 )

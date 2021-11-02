@@ -30,7 +30,7 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity_y -= gravity * delta
 	if follow_target and is_following:
-		look_at(Vector3(follow_target.global_transform.origin.x, 0.5, follow_target.global_transform.origin.z), FLOOR_NORMAL)
+		look_at(Vector3(follow_target.global_transform.origin.x, global_transform.origin.y, follow_target.global_transform.origin.z), FLOOR_NORMAL)
 		move_to_target(delta)
 	if is_on_floor() or is_on_ceiling():
 		velocity_y = 0.0

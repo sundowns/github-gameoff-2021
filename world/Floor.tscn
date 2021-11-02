@@ -7,7 +7,6 @@ extents = Vector3( 100, 1, 30 )
 size = Vector3( 200, 2, 60 )
 
 [sub_resource type="SpatialMaterial" id=3]
-albedo_color = Color( 0.701961, 0.701961, 0.701961, 1 )
 
 [node name="Floor" type="StaticBody"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
