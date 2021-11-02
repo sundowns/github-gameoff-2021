@@ -1,2 +1,4 @@
 .import/.addons
 addons
+.vscode
+.DS_Store
