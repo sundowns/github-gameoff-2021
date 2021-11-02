@@ -1,16 +1,32 @@
 extends KinematicBody
 
+# Extended from https://github.com/GDQuest/godot-demos/blob/master/2019/03-23-z-axis-in-2d/src/Godette.gd
 
-# Declare member variables here. Examples:
-# var a: int = 2
-# var b: String = "text"
+const FLOOR_NORMAL = Vector3(0.0, 1.0, 0.0)
 
+export var speed := 7.0
+export var gravity := 30.0
+export var jump_force := 6.0
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+var velocity_y := 0.0
 
+func _physics_process(delta: float) -> void:
+	var direction_ground := Vector3(
+		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
+		Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up"), 0).normalized()
+	
+	if not is_on_floor():
+		velocity_y -= gravity * delta
+	
+	var velocity = Vector3(
+		direction_ground.x * speed,
+		velocity_y,
+		direction_ground.y * speed)
+	move_and_slide(velocity, FLOOR_NORMAL)
+	
+	if is_on_floor() or is_on_ceiling():
+		velocity_y = 0.0
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#	pass
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("jump"):
+		velocity_y = jump_force
