@@ -20,11 +20,12 @@ albedo_color = Color( 0.701961, 0.701961, 0.701961, 1 )
 environment = ExtResource( 3 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 3.366, 4 )
+transform = Transform( 1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 3, 6 )
 current = true
 script = ExtResource( 4 )
 follow_target_path = NodePath("../Player")
-smooth_speed = 5.0
+smooth_speed = 3.0
+offset = Vector3( 0, 3, 6 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 

@@ -11,6 +11,7 @@ export var jump_force := 6.0
 var velocity_y := 0.0
 
 func _physics_process(delta: float) -> void:
+	var start_position := global_transform.origin
 	var direction_ground := Vector3(
 		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
 		Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up"), 0).normalized()
@@ -26,7 +27,7 @@ func _physics_process(delta: float) -> void:
 	
 	if is_on_floor() or is_on_ceiling():
 		velocity_y = 0.0
-
+	
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
 		velocity_y = jump_force
