@@ -79,6 +79,10 @@ window/size/height=720
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_width"
 
+[global]
+
+Physics=false
+
 [input]
 
 ui_left={
@@ -120,6 +124,7 @@ jump={
 3d_physics/layer_1="World"
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Companion"
+3d_physics/layer_4="Prop"
 
 [physics]
 

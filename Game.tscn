@@ -1,12 +1,17 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://world/Wall.tscn" type="PackedScene" id=2]
-[ext_resource path="res://world/game_world_environment.tres" type="Environment" id=3]
+[ext_resource path="res://world/environments/dark_world_environment.tres" type="Environment" id=3]
 [ext_resource path="res://entities/OffsetFollower.gd" type="Script" id=4]
 [ext_resource path="res://world/Floor.tscn" type="PackedScene" id=5]
 [ext_resource path="res://entities/TinyTimmy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://entities/LilJimmy.tscn" type="PackedScene" id=7]
+[ext_resource path="res://world/props/Cactus.tscn" type="PackedScene" id=8]
+[ext_resource path="res://world/props/LogStack.tscn" type="PackedScene" id=9]
+[ext_resource path="res://world/props/Tent.tscn" type="PackedScene" id=10]
+[ext_resource path="res://world/props/Tree.tscn" type="PackedScene" id=11]
+[ext_resource path="res://world/props/TreeGreen.tscn" type="PackedScene" id=12]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 100, 40, 1 )
@@ -21,19 +26,19 @@ size = Vector3( 8, 0.5, 8 )
 vertex_color_use_as_albedo = true
 albedo_color = Color( 1, 0.705882, 0.14902, 1 )
 
-[sub_resource type="BoxShape" id=6]
+[sub_resource type="BoxShape" id=5]
 extents = Vector3( 4, 0.25, 4 )
 
-[sub_resource type="CubeMesh" id=9]
+[sub_resource type="CubeMesh" id=6]
 size = Vector3( 4, 0.5, 4 )
 
-[sub_resource type="BoxShape" id=8]
+[sub_resource type="BoxShape" id=7]
 extents = Vector3( 2, 0.25, 2 )
 
-[sub_resource type="CubeMesh" id=7]
+[sub_resource type="CubeMesh" id=8]
 size = Vector3( 1, 0.5, 1 )
 
-[sub_resource type="BoxShape" id=10]
+[sub_resource type="BoxShape" id=9]
 extents = Vector3( 0.5, 0.25, 0.5 )
 
 [node name="World" type="Spatial"]
@@ -64,7 +69,7 @@ follow_target_path = NodePath("../Player")
 [node name="Lights" type="Node" parent="."]
 
 [node name="SpotLight" type="SpotLight" parent="Lights"]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 15, 0 )
+transform = Transform( 1, 0, 0, 0, 0.258819, 0.965926, 0, -0.965926, 0.258819, -0.072, 15, 5 )
 light_color = Color( 1, 0.972549, 0.92549, 1 )
 spot_range = 36.8
 spot_attenuation = 4.14104
@@ -73,7 +78,7 @@ spot_angle_attenuation = 0.353553
 script = ExtResource( 4 )
 follow_target_path = NodePath("../../Entities/Player")
 smooth_speed = 3.0
-offset = Vector3( 0, 15, 0 )
+offset = Vector3( 0, 15, 5 )
 
 [node name="StaticObjects" type="Spatial" parent="."]
 
@@ -149,7 +154,7 @@ material/0 = SubResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticObjects/Wall7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="Wall13" type="StaticBody" parent="StaticObjects"]
 transform = Transform( -5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, 8, 0.5, 4 )
@@ -157,12 +162,12 @@ collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticObjects/Wall13"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
-mesh = SubResource( 9 )
+mesh = SubResource( 6 )
 material/0 = SubResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticObjects/Wall13"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
-shape = SubResource( 8 )
+shape = SubResource( 7 )
 
 [node name="Wall14" type="StaticBody" parent="StaticObjects"]
 transform = Transform( -5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, 8, 1, 4 )
@@ -170,9 +175,60 @@ collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticObjects/Wall14"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
-mesh = SubResource( 7 )
+mesh = SubResource( 8 )
 material/0 = SubResource( 4 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticObjects/Wall14"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
-shape = SubResource( 10 )
+shape = SubResource( 9 )
+
+[node name="Prop" parent="StaticObjects" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.509044, -2 )
+
+[node name="Prop2" parent="StaticObjects" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.90477, 0.509044, -2 )
+
+[node name="Prop3" parent="StaticObjects" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2523, 0.509044, -2 )
+
+[node name="Prop4" parent="StaticObjects" instance=ExtResource( 8 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -1.252, 0, 7.304 )
+
+[node name="Prop5" parent="StaticObjects" instance=ExtResource( 9 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -6, 0, 5 )
+
+[node name="Prop6" parent="StaticObjects" instance=ExtResource( 10 )]
+transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 1, -15, 0, 4 )
+
+[node name="Prop7" parent="StaticObjects" instance=ExtResource( 11 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -11, 0, 8 )
+
+[node name="Prop10" parent="StaticObjects" instance=ExtResource( 11 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -15, 0, -5 )
+
+[node name="Prop9" parent="StaticObjects" instance=ExtResource( 11 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -18, 0, 4 )
+
+[node name="Prop8" parent="StaticObjects" instance=ExtResource( 11 )]
+transform = Transform( 2.5, 0, 0, 0, 2.5, 0, 0, 0, 1, -9, 0, 6 )
+
+[node name="Prop11" parent="StaticObjects" instance=ExtResource( 11 )]
+transform = Transform( 2.5, 0, 0, 0, 2.5, 0, 0, 0, 1, -17, 0, -1 )
+
+[node name="Prop12" parent="StaticObjects" instance=ExtResource( 11 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, -12, 0, -1 )
+
+[node name="Prop13" parent="StaticObjects" instance=ExtResource( 11 )]
+transform = Transform( 2.5, 0, 0, 0, 2.5, 0, 0, 0, 1, -20, 0, 7 )
+
+[node name="TreeGreen" parent="StaticObjects" instance=ExtResource( 12 )]
+transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 1, -22, 1, 1 )
+
+[node name="TreeGreen4" parent="StaticObjects" instance=ExtResource( 12 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, -17, 0.553017, 8 )
+
+[node name="TreeGreen2" parent="StaticObjects" instance=ExtResource( 12 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -19, 1, -4 )
+
+[node name="TreeGreen3" parent="StaticObjects" instance=ExtResource( 12 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -15, 1, 1 )
