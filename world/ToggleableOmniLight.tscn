@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://world/ToggleableLight.gd" type="Script" id=1]
+
+[node name="ToggleableOmniLight" type="OmniLight"]
+light_color = Color( 1, 0, 0, 1 )
+shadow_enabled = true
+omni_range = 7.0
+script = ExtResource( 1 )
