@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://world/ToggleableLight.gd" type="Script" id=1]
+
+[node name="ToggleableSpotLight" type="SpotLight"]
+light_color = Color( 1, 0, 0, 1 )
+shadow_enabled = true
+script = ExtResource( 1 )

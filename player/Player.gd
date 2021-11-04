@@ -11,6 +11,8 @@ export var jump_force := 6.0
 
 var velocity_y := 0.0
 
+var current_interactable_area: InteractableArea = null
+
 func _physics_process(delta: float) -> void:
 	var direction_ground := Vector3(
 		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
@@ -32,3 +34,12 @@ func _physics_process(delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
 		velocity_y = jump_force
+	if event.is_action_pressed("use") and current_interactable_area != null:
+		current_interactable_area.trigger()
+
+func _on_InteractableDetectionZone_area_entered(area: Area) -> void:
+	current_interactable_area = area
+
+
+func _on_InteractableDetectionZone_area_exited(area: Area) -> void:
+	current_interactable_area = null

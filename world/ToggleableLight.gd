@@ -1,8 +1,8 @@
-extends OmniLight
+extends Light
 
 var initial_energy := 0.0
 var is_active := false
-export(float) var start_on := false
+export(bool) var start_on := false
 
 func _ready():
 	initial_energy = light_energy

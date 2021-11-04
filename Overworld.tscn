@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://world/Overworld.gd" type="Script" id=1]
 [ext_resource path="res://world/props/Cactus.tscn" type="PackedScene" id=2]
@@ -15,12 +15,29 @@
 [ext_resource path="res://entities/OffsetFollower.gd" type="Script" id=13]
 [ext_resource path="res://world/PlayerDetectionArea.tscn" type="PackedScene" id=14]
 [ext_resource path="res://world/ToggleableOmniLight.tscn" type="PackedScene" id=15]
+[ext_resource path="res://world/ToggleableSpotLight.tscn" type="PackedScene" id=16]
+[ext_resource path="res://world/InteractableArea.tscn" type="PackedScene" id=17]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 100, 40, 1 )
 
 [sub_resource type="PlaneMesh" id=2]
 size = Vector2( 5000, 150 )
+
+[sub_resource type="CubeMesh" id=11]
+size = Vector3( 0.4, 3, 0.4 )
+
+[sub_resource type="SpatialMaterial" id=14]
+albedo_color = Color( 0.415686, 0.415686, 0.415686, 1 )
+
+[sub_resource type="CubeMesh" id=15]
+size = Vector3( 1, 0.25, 1 )
+
+[sub_resource type="SpatialMaterial" id=16]
+albedo_color = Color( 0.192157, 0.192157, 0.192157, 1 )
+
+[sub_resource type="BoxShape" id=13]
+extents = Vector3( 0.2, 1.5, 0.2 )
 
 [sub_resource type="CubeMesh" id=3]
 size = Vector3( 8, 0.5, 8 )
@@ -46,6 +63,9 @@ extents = Vector3( 0.5, 0.25, 0.5 )
 
 [sub_resource type="BoxShape" id=10]
 extents = Vector3( 0.5, 0.5, 0.5 )
+
+[sub_resource type="BoxShape" id=17]
+extents = Vector3( 0.7, 1, 0.7 )
 
 [node name="Overworld" type="Spatial"]
 script = ExtResource( 1 )
@@ -123,6 +143,31 @@ __meta__ = {
 [node name="Wall" parent="StaticObjects" instance=ExtResource( 8 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -2 )
 
+[node name="Lamp" type="StaticBody" parent="StaticObjects"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5056, 0, 2 )
+collision_mask = 0
+
+[node name="Post" type="MeshInstance" parent="StaticObjects/Lamp"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0 )
+mesh = SubResource( 11 )
+material/0 = SubResource( 14 )
+
+[node name="LampTop" type="MeshInstance" parent="StaticObjects/Lamp"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3497, 0 )
+mesh = SubResource( 15 )
+material/0 = SubResource( 16 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticObjects/Lamp"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0 )
+shape = SubResource( 13 )
+
+[node name="ToggleableSpotLight" parent="StaticObjects/Lamp" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.19303, 0 )
+light_color = Color( 1, 0.882353, 0.741176, 1 )
+shadow_enabled = false
+spot_angle = 60.0
+start_on = true
+
 [node name="Wall5" parent="StaticObjects" instance=ExtResource( 8 )]
 transform = Transform( 1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -2, 2, -4 )
 
@@ -195,6 +240,9 @@ shape = SubResource( 9 )
 [node name="Prop" parent="StaticObjects" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.509044, -2 )
 
+[node name="Prop14" parent="StaticObjects" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.42582, -0.00256807, 3.47181 )
+
 [node name="Prop2" parent="StaticObjects" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.90477, 0.509044, -2 )
 
@@ -205,7 +253,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2523, 0.509044, -2 )
 transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -1.252, 0, 7.304 )
 
 [node name="Prop5" parent="StaticObjects" instance=ExtResource( 11 )]
-transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -6, 0, 5 )
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -6, 0, 6.2413 )
 
 [node name="Prop6" parent="StaticObjects" instance=ExtResource( 3 )]
 transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 1, -15, 0, 4 )
@@ -220,7 +268,7 @@ transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -15, 0, -5 )
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -18, 0, 4 )
 
 [node name="Prop8" parent="StaticObjects" instance=ExtResource( 9 )]
-transform = Transform( 2.5, 0, 0, 0, 2.5, 0, 0, 0, 1, -9, 0, 6 )
+transform = Transform( 2.5, 0, 0, 0, 2.5, 0, 0, 0, 1, -9, 0, 0.935074 )
 
 [node name="Prop11" parent="StaticObjects" instance=ExtResource( 9 )]
 transform = Transform( 2.5, 0, 0, 0, 2.5, 0, 0, 0, 1, -17, 0, -1 )
@@ -251,7 +299,15 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, 4 )
 [node name="CollisionShape" parent="Triggers/PlayerDetectionArea" index="0"]
 shape = SubResource( 10 )
 
+[node name="InteractableArea" parent="Triggers" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.40468, 0.210079, 3.45115 )
+
+[node name="CollisionShape" parent="Triggers/InteractableArea" index="0"]
+shape = SubResource( 17 )
+
 [connection signal="player_entered" from="Triggers/PlayerDetectionArea" to="Lights/ToggleableOmniLight" method="toggle"]
 [connection signal="player_exited" from="Triggers/PlayerDetectionArea" to="Lights/ToggleableOmniLight" method="toggle"]
+[connection signal="triggered" from="Triggers/InteractableArea" to="StaticObjects/Lamp/ToggleableSpotLight" method="toggle"]
 
 [editable path="Triggers/PlayerDetectionArea"]
+[editable path="Triggers/InteractableArea"]
