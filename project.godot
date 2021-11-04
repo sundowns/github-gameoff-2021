@@ -28,12 +28,18 @@ _global_script_classes=[ {
 "class": "Player",
 "language": "GDScript",
 "path": "res://player/Player.gd"
+}, {
+"base": "Spatial",
+"class": "SpeechBubble",
+"language": "GDScript",
+"path": "res://entities/CharacterSpeechBubble.gd"
 } ]
 _global_script_class_icons={
 "Companion": "",
 "InteractableArea": "",
 "OffsetFollower": "",
-"Player": ""
+"Player": "",
+"SpeechBubble": ""
 }
 
 [application]
@@ -41,6 +47,10 @@ _global_script_class_icons={
 config/name="Github-gameoff- 2021"
 run/main_scene="res://Overworld.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+NarrativeManager="*res://MasterNarrativeManager.gd"
 
 [display]
 

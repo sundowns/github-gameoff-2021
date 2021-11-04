@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://ui/speech/SpeechBubbleContainer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/CharacterSpeechBubble.gd" type="Script" id=2]
+
+[sub_resource type="PlaneMesh" id=1]
+size = Vector2( 2.67, 1 )
+
+[sub_resource type="ViewportTexture" id=2]
+viewport_path = NodePath("SpeechBubbleViewportContainer/Viewport")
+
+[sub_resource type="SpatialMaterial" id=3]
+resource_local_to_scene = true
+flags_unshaded = true
+params_cull_mode = 2
+albedo_texture = SubResource( 2 )
+
+[node name="CharacterSpeechBubble" type="Spatial"]
+script = ExtResource( 2 )
+
+[node name="SpeechBubble" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.03649, 0 )
+mesh = SubResource( 1 )
+material/0 = SubResource( 3 )
+
+[node name="SpeechBubbleViewportContainer" type="ViewportContainer" parent="."]
+margin_right = 400.0
+margin_bottom = 150.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="SpeechBubbleViewportContainer"]
+size = Vector2( 400, 150 )
+handle_input_locally = false
+hdr = false
+render_target_update_mode = 3
+
+[node name="SpeechBubbleContainer" parent="SpeechBubbleViewportContainer/Viewport" instance=ExtResource( 1 )]

@@ -32,10 +32,8 @@ tracks/1/keys = {
 }
 
 [node name="SpeechBubbleContainer" type="Control"]
-anchor_right = 0.312
-anchor_bottom = 0.208
-margin_right = 0.639984
-margin_bottom = 0.23999
+anchor_right = 1.0
+anchor_bottom = 1.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false

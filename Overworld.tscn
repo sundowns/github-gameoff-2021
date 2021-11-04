@@ -81,6 +81,8 @@ follow_target_path = NodePath("../Entities/Player")
 smooth_speed = 3.0
 offset = Vector3( 0, 3, 6 )
 
+[node name="SceneNarrativeHandler" type="Node" parent="."]
+
 [node name="Entities" type="Node" parent="."]
 
 [node name="Player" parent="Entities" instance=ExtResource( 7 )]
@@ -311,8 +313,6 @@ one_shot = true
 
 [node name="CollisionShape" parent="Triggers/InteractableArea" index="0"]
 shape = SubResource( 16 )
-
-[node name="Node" type="Node" parent="."]
 
 [connection signal="player_entered" from="Triggers/PlayerDetectionArea" to="Lights/ToggleableOmniLight" method="toggle"]
 [connection signal="player_exited" from="Triggers/PlayerDetectionArea" to="Lights/ToggleableOmniLight" method="toggle"]
