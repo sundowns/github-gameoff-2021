@@ -24,47 +24,47 @@ extents = Vector3( 100, 40, 1 )
 [sub_resource type="PlaneMesh" id=2]
 size = Vector2( 5000, 150 )
 
-[sub_resource type="CubeMesh" id=11]
+[sub_resource type="CubeMesh" id=3]
 size = Vector3( 0.4, 3, 0.4 )
 
-[sub_resource type="SpatialMaterial" id=14]
+[sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 0.415686, 0.415686, 0.415686, 1 )
 
-[sub_resource type="CubeMesh" id=15]
+[sub_resource type="CubeMesh" id=5]
 size = Vector3( 1, 0.25, 1 )
 
-[sub_resource type="SpatialMaterial" id=16]
+[sub_resource type="SpatialMaterial" id=6]
 albedo_color = Color( 0.192157, 0.192157, 0.192157, 1 )
 
-[sub_resource type="BoxShape" id=13]
+[sub_resource type="BoxShape" id=7]
 extents = Vector3( 0.2, 1.5, 0.2 )
 
-[sub_resource type="CubeMesh" id=3]
+[sub_resource type="CubeMesh" id=8]
 size = Vector3( 8, 0.5, 8 )
 
-[sub_resource type="SpatialMaterial" id=4]
+[sub_resource type="SpatialMaterial" id=9]
 vertex_color_use_as_albedo = true
 albedo_color = Color( 1, 0.705882, 0.14902, 1 )
 
-[sub_resource type="BoxShape" id=5]
+[sub_resource type="BoxShape" id=10]
 extents = Vector3( 4, 0.25, 4 )
 
-[sub_resource type="CubeMesh" id=6]
+[sub_resource type="CubeMesh" id=11]
 size = Vector3( 4, 0.5, 4 )
 
-[sub_resource type="BoxShape" id=7]
+[sub_resource type="BoxShape" id=12]
 extents = Vector3( 2, 0.25, 2 )
 
-[sub_resource type="CubeMesh" id=8]
+[sub_resource type="CubeMesh" id=13]
 size = Vector3( 1, 0.5, 1 )
 
-[sub_resource type="BoxShape" id=9]
+[sub_resource type="BoxShape" id=14]
 extents = Vector3( 0.5, 0.25, 0.5 )
 
-[sub_resource type="BoxShape" id=10]
+[sub_resource type="BoxShape" id=15]
 extents = Vector3( 0.5, 0.5, 0.5 )
 
-[sub_resource type="BoxShape" id=17]
+[sub_resource type="BoxShape" id=16]
 extents = Vector3( 0.7, 1, 0.7 )
 
 [node name="Overworld" type="Spatial"]
@@ -149,17 +149,17 @@ collision_mask = 0
 
 [node name="Post" type="MeshInstance" parent="StaticObjects/Lamp"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0 )
-mesh = SubResource( 11 )
-material/0 = SubResource( 14 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
 
 [node name="LampTop" type="MeshInstance" parent="StaticObjects/Lamp"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3497, 0 )
-mesh = SubResource( 15 )
-material/0 = SubResource( 16 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticObjects/Lamp"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0 )
-shape = SubResource( 13 )
+shape = SubResource( 7 )
 
 [node name="ToggleableSpotLight" parent="StaticObjects/Lamp" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.19303, 0 )
@@ -204,12 +204,12 @@ collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticObjects/Wall7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
-mesh = SubResource( 3 )
-material/0 = SubResource( 4 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 9 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticObjects/Wall7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
-shape = SubResource( 5 )
+shape = SubResource( 10 )
 
 [node name="Wall13" type="StaticBody" parent="StaticObjects"]
 transform = Transform( -5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, 8, 0.5, 4 )
@@ -217,12 +217,12 @@ collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticObjects/Wall13"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
-mesh = SubResource( 6 )
-material/0 = SubResource( 4 )
+mesh = SubResource( 11 )
+material/0 = SubResource( 9 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticObjects/Wall13"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
-shape = SubResource( 7 )
+shape = SubResource( 12 )
 
 [node name="Wall14" type="StaticBody" parent="StaticObjects"]
 transform = Transform( -5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, 8, 1, 4 )
@@ -230,12 +230,12 @@ collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticObjects/Wall14"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
-mesh = SubResource( 8 )
-material/0 = SubResource( 4 )
+mesh = SubResource( 13 )
+material/0 = SubResource( 9 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticObjects/Wall14"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
-shape = SubResource( 9 )
+shape = SubResource( 14 )
 
 [node name="Prop" parent="StaticObjects" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.509044, -2 )
@@ -297,18 +297,29 @@ transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -15, 1, 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, 4 )
 
 [node name="CollisionShape" parent="Triggers/PlayerDetectionArea" index="0"]
-shape = SubResource( 10 )
+shape = SubResource( 15 )
+
+[node name="PlayerDetectionArea2" parent="Triggers" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.42161, 0.566033, 3.49321 )
+
+[node name="CollisionShape" parent="Triggers/PlayerDetectionArea2" index="0"]
+shape = SubResource( 15 )
 
 [node name="InteractableArea" parent="Triggers" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.40468, 0.210079, 3.45115 )
 one_shot = true
 
 [node name="CollisionShape" parent="Triggers/InteractableArea" index="0"]
-shape = SubResource( 17 )
+shape = SubResource( 16 )
+
+[node name="Node" type="Node" parent="."]
 
 [connection signal="player_entered" from="Triggers/PlayerDetectionArea" to="Lights/ToggleableOmniLight" method="toggle"]
 [connection signal="player_exited" from="Triggers/PlayerDetectionArea" to="Lights/ToggleableOmniLight" method="toggle"]
+[connection signal="player_entered" from="Triggers/PlayerDetectionArea2" to="Lights/ToggleableOmniLight" method="toggle"]
+[connection signal="player_exited" from="Triggers/PlayerDetectionArea2" to="Lights/ToggleableOmniLight" method="toggle"]
 [connection signal="triggered" from="Triggers/InteractableArea" to="StaticObjects/Lamp/ToggleableSpotLight" method="toggle"]
 
 [editable path="Triggers/PlayerDetectionArea"]
+[editable path="Triggers/PlayerDetectionArea2"]
 [editable path="Triggers/InteractableArea"]
