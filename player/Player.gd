@@ -48,5 +48,5 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_InteractableDetectionZone_area_entered(area: Area) -> void:
 	current_interactable_area = area
 
-func _on_InteractableDetectionZone_area_exited(area: Area) -> void:
+func _on_InteractableDetectionZone_area_exited(_area: Area) -> void:
 	current_interactable_area = null
