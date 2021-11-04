@@ -301,6 +301,7 @@ shape = SubResource( 10 )
 
 [node name="InteractableArea" parent="Triggers" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.40468, 0.210079, 3.45115 )
+one_shot = true
 
 [node name="CollisionShape" parent="Triggers/InteractableArea" index="0"]
 shape = SubResource( 17 )

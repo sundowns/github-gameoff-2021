@@ -12,6 +12,9 @@ export var jump_force := 6.0
 var velocity_y := 0.0
 
 var current_interactable_area: InteractableArea = null
+onready var interactable_marker: Sprite3D = $CanInteractWithShitIndicator
+export(float) var interaction_marker_rotation_speed := 5.0
+
 
 func _physics_process(delta: float) -> void:
 	var direction_ground := Vector3(
@@ -30,7 +33,12 @@ func _physics_process(delta: float) -> void:
 	
 	if is_on_floor() or is_on_ceiling():
 		velocity_y = 0.0
-	
+
+func _process(delta: float) -> void:
+	interactable_marker.visible = current_interactable_area != null and current_interactable_area.can_be_used()
+	if interactable_marker.visible:
+		interactable_marker.rotation_degrees += Vector3.UP * interaction_marker_rotation_speed * delta
+
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump"):
 		velocity_y = jump_force
@@ -39,7 +47,6 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _on_InteractableDetectionZone_area_entered(area: Area) -> void:
 	current_interactable_area = area
-
 
 func _on_InteractableDetectionZone_area_exited(area: Area) -> void:
 	current_interactable_area = null
