@@ -1,12 +1,13 @@
 extends Spatial
 class_name SpeechBubble
 
-export(NarrativeDirector.ALL_SPEAKERS) var character_name
+export(String) var character_name
 
 signal on_display_finished
 
 func _ready():
 	visible = false
+	character_name = character_name.to_lower()
 	call_deferred("register_self")
 
 func register_self():

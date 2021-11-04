@@ -6,14 +6,14 @@
 [sub_resource type="PlaneMesh" id=1]
 size = Vector2( 3, 1.5 )
 
-[sub_resource type="ViewportTexture" id=4]
+[sub_resource type="ViewportTexture" id=2]
 viewport_path = NodePath("SpeechBubbleViewportContainer/Viewport")
 
 [sub_resource type="SpatialMaterial" id=3]
 resource_local_to_scene = true
 flags_unshaded = true
 params_cull_mode = 2
-albedo_texture = SubResource( 4 )
+albedo_texture = SubResource( 2 )
 
 [node name="CharacterSpeechBubble" type="Spatial"]
 script = ExtResource( 2 )
@@ -27,7 +27,7 @@ __meta__ = {
 
 [node name="Viewport" type="Viewport" parent="SpeechBubbleViewportContainer"]
 size = Vector2( 600, 300 )
-own_world = true
+transparent_bg = true
 handle_input_locally = false
 hdr = false
 render_target_update_mode = 3
