@@ -19,13 +19,14 @@ func run_scene_script():
 	scene_narrative()
 	# Prolly some other stuff like end-of-scene's narrative signal
 
-# Overridable function for scene dialogue? idk
+# Overridable function for scene dialogue
+#https://docs.godotengine.org/en/stable/tutorials/gui/bbcode_in_richtextlabel.html
 func scene_narrative():
 	var peter = current_speech_bubbles["peter"]
 	var jimmy = current_speech_bubbles["jimmy"]
 	var timmy = current_speech_bubbles["timmy"]
 	
-	peter.display("[color=red]Woah I'm like - totally bugging out over here man[/color]")
+	peter.display("[color=red]W[color=yellow]O[color=green]A[color=blue]H [color=white]I'm like - [u]totally[/u] bugging out over here man[/color]")
 	yield(peter, "on_display_finished")
 	yield(get_tree().create_timer(1.0), "timeout")
 	
