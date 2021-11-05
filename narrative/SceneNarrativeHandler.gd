@@ -37,8 +37,12 @@ func handle_narrative_item(item):
 				speaker.display(item.what)
 				yield(speaker, "on_display_finished")
 		"camera_follow_change":
-			pass
+			pass #Change follow target on the camera script
 		"camera_motion_tween":
-			pass
+			pass #Might be a YAGNI on this one for now, probably will be useful but not sure how to do
 		"signal_emit":
-			pass
+			pass #find a node by key, then emit a signal. Optionally, deferred
+		"start_cutscene":
+			pass #take control from player
+		"end_cutscene":
+			pass #return control to player

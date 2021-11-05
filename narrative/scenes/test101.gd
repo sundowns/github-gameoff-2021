@@ -13,7 +13,7 @@ func _ready():
 		]
 	}
 	
-# The sequence automatically run when the scene loads.
+# This sequence automatically run when the scene loads.
 	statements = [
 		SceneDialogue.new("peter","[color=red]W[color=yellow]O[color=green]A[color=blue]H [color=white]I'm like - [u]totally[/u] bugging out over here man[/color]"),
 		Wait.new(1),
