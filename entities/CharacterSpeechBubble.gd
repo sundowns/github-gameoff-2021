@@ -14,7 +14,11 @@ func register_self():
 	get_tree().current_scene.get_node("SceneNarrativeHandler").register_new_speech_bubble(self)
 
 func display(text: String):
-	$SpeechBubbleViewportContainer/Viewport/SpeechBubbleContainer.display_text(text)
+	visible = true
+	$Viewport/SpeechBubbleContainer.display_text(text)
 
 func _on_SpeechBubbleContainer_text_finished_displaying() -> void:
+	pass # The text has finished printing
+
+func _on_SpeechBubbleContainer_speech_bubble_closing() -> void:
 	emit_signal("on_display_finished")

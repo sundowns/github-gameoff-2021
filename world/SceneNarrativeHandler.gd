@@ -22,11 +22,21 @@ func run_scene_script():
 # Overridable function for scene dialogue? idk
 func scene_narrative():
 	var peter = current_speech_bubbles["peter"]
-	peter.display("[color=red]I'm GAMING out here and i l-l-love it!!!![/color]")
+	var jimmy = current_speech_bubbles["jimmy"]
+	var timmy = current_speech_bubbles["timmy"]
+	
+	peter.display("[color=red]Woah I'm like - totally bugging out over here man[/color]")
 	yield(peter, "on_display_finished")
 	yield(get_tree().create_timer(1.0), "timeout")
-	peter.display("[color=green]You tryna throw down or what??[/color]")
-	yield(peter, "on_display_finished")
+	
+	jimmy.display("[color=green]....[/color]")
+	yield(jimmy, "on_display_finished")
+	yield(get_tree().create_timer(1.0), "timeout")
+	jimmy.display("[color=green]You can't just say that man[/color]")
+	yield(jimmy, "on_display_finished")
+	yield(get_tree().create_timer(0.5), "timeout")
+	timmy.display("[color=pink]u guys r starting to piss me off....[/color]")
+	yield(timmy, "on_display_finished")
 
 class SceneDialogue:
 	var who: String = "peter"
@@ -36,7 +46,7 @@ class SceneDialogue:
 		what=_what
 
 var scene_dialogue = {
-	"button_prompt": SceneDialogue.new("peter", "[color=white]I could use this...[/color]")
+	"button_prompt": SceneDialogue.new("peter", "[color=white][i]I could use this...[/i][/color]")
 }
 
 func display_callback(dialogue_key: String):

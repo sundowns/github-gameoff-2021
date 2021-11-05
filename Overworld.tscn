@@ -11,7 +11,7 @@
 [ext_resource path="res://world/props/Tree.tscn" type="PackedScene" id=9]
 [ext_resource path="res://world/props/TreeGreen.tscn" type="PackedScene" id=10]
 [ext_resource path="res://world/props/LogStack.tscn" type="PackedScene" id=11]
-[ext_resource path="res://world/environments/dark_world_environment.tres" type="Environment" id=12]
+[ext_resource path="res://world/environments/bright_world_environment.tres" type="Environment" id=12]
 [ext_resource path="res://entities/OffsetFollower.gd" type="Script" id=13]
 [ext_resource path="res://world/PlayerDetectionArea.tscn" type="PackedScene" id=14]
 [ext_resource path="res://world/ToggleableOmniLight.tscn" type="PackedScene" id=15]
@@ -63,7 +63,7 @@ size = Vector3( 1, 0.5, 1 )
 extents = Vector3( 0.5, 0.25, 0.5 )
 
 [sub_resource type="BoxShape" id=15]
-extents = Vector3( 0.5, 0.5, 0.5 )
+extents = Vector3( 0.7, 0.5, 0.7 )
 
 [sub_resource type="BoxShape" id=16]
 extents = Vector3( 0.7, 1, 0.7 )
@@ -303,12 +303,14 @@ transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -15, 1, 1 )
 
 [node name="PlayerDetectionArea" parent="Triggers" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, 4 )
+reactivation_lockout = 0.0
 
 [node name="CollisionShape" parent="Triggers/PlayerDetectionArea" index="0"]
 shape = SubResource( 15 )
 
 [node name="PlayerDetectionArea2" parent="Triggers" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.42161, 0.566033, 3.49321 )
+reactivation_lockout = 2.0
 
 [node name="CollisionShape" parent="Triggers/PlayerDetectionArea2" index="0"]
 shape = SubResource( 15 )

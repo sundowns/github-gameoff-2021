@@ -12,17 +12,23 @@ var is_writing_out_text := false
 var is_waiting_for_prompt := false
 
 signal text_finished_displaying
+signal speech_bubble_closing
 signal prompt_pressed
 
 const margin_offset = 8
-const delay_beforehand := 0.5
-const delay_afterward := 3.0
+const delay_beforehand := 0.2
+const delay_afterward := 2.0
 const time_per_char = 0.02
 
 func display_text(new_text: String):
+	timer.stop()
+# warning-ignore:return_value_discarded
+	tween.stop_all()
 	visible = true
+	
 	text_box.percent_visible = 0
 	is_writing_out_text = true
+	yield(get_tree().create_timer(delay_beforehand), "timeout")
 	
 	text_box.bbcode_text = new_text
 	
@@ -58,4 +64,5 @@ func _on_Tween_tween_all_completed() -> void:
 	emit_signal("text_finished_displaying")
 
 func _on_Timer_timeout() -> void:
+	emit_signal("speech_bubble_closing")
 	visible = false
