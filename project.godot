@@ -39,6 +39,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://player/Player.gd"
 }, {
+"base": "Node",
+"class": "SceneNarrative",
+"language": "GDScript",
+"path": "res://narrative/SceneNarrative.gd"
+}, {
+"base": "Node",
+"class": "SceneNarrativeHandler",
+"language": "GDScript",
+"path": "res://narrative/SceneNarrativeHandler.gd"
+}, {
 "base": "Spatial",
 "class": "SpeechBubble",
 "language": "GDScript",
@@ -56,6 +66,8 @@ _global_script_class_icons={
 "InteractableArea": "",
 "OffsetFollower": "",
 "Player": "",
+"SceneNarrative": "",
+"SceneNarrativeHandler": "",
 "SpeechBubble": "",
 "SpeechBubbleContainer": ""
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://world/Overworld.gd" type="Script" id=1]
 [ext_resource path="res://world/props/Cactus.tscn" type="PackedScene" id=2]
@@ -17,7 +17,8 @@
 [ext_resource path="res://world/ToggleableOmniLight.tscn" type="PackedScene" id=15]
 [ext_resource path="res://world/ToggleableSpotLight.tscn" type="PackedScene" id=16]
 [ext_resource path="res://world/InteractableArea.tscn" type="PackedScene" id=17]
-[ext_resource path="res://world/SceneNarrativeHandler.gd" type="Script" id=18]
+[ext_resource path="res://narrative/SceneNarrativeHandler.gd" type="Script" id=18]
+[ext_resource path="res://narrative/scenes/test101.gd" type="Script" id=19]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 100, 40, 1 )
@@ -88,6 +89,9 @@ script = ExtResource( 18 )
 [node name="StartDelay" type="Timer" parent="SceneNarrativeHandler"]
 one_shot = true
 autostart = true
+
+[node name="Narrative" type="Node" parent="SceneNarrativeHandler"]
+script = ExtResource( 19 )
 
 [node name="Entities" type="Node" parent="."]
 
@@ -325,7 +329,7 @@ shape = SubResource( 16 )
 [connection signal="timeout" from="SceneNarrativeHandler/StartDelay" to="SceneNarrativeHandler" method="_on_StartDelay_timeout"]
 [connection signal="player_entered" from="Triggers/PlayerDetectionArea" to="Lights/ToggleableOmniLight" method="toggle"]
 [connection signal="player_exited" from="Triggers/PlayerDetectionArea" to="Lights/ToggleableOmniLight" method="toggle"]
-[connection signal="player_entered" from="Triggers/PlayerDetectionArea2" to="SceneNarrativeHandler" method="display_callback" flags=3 binds= [ "button_prompt" ]]
+[connection signal="player_entered" from="Triggers/PlayerDetectionArea2" to="SceneNarrativeHandler" method="display_callback" flags=3 binds= [ "lamp_button_prompt" ]]
 [connection signal="triggered" from="Triggers/InteractableArea" to="Triggers/PlayerDetectionArea2" method="disable"]
 [connection signal="triggered" from="Triggers/InteractableArea" to="StaticObjects/Lamp/ToggleableSpotLight" method="toggle"]
 
