@@ -15,6 +15,8 @@ var velocity_y := 0.0
 var is_following := false
 export(float) var min_follow_distance := 1.0
 export(float) var catchup_follow_distance := 3.0
+export(float) var teleport_catchup_distance := 10.0
+const distance_to_teleport_to_from_follow_target := 6.0
 
 export(float) var speed := 6.0
 export(float) var catchup_speed := 8.0
@@ -52,7 +54,7 @@ func move_to_target(_delta: float):
 		velocity_y,
 		direction.z * effective_speed)
 		
-	if to_target.length() < min_follow_distance:
+	if distance_to_target < min_follow_distance:
 		velocity.x = 0
 		velocity.z = 0
 	
@@ -61,3 +63,8 @@ func move_to_target(_delta: float):
 	
 	if is_on_floor() or is_on_ceiling():
 		velocity_y = 0.0
+	
+	# unstuck target
+	if distance_to_target > teleport_catchup_distance:
+		var new_position = follow_target.global_transform.origin + -direction * distance_to_teleport_to_from_follow_target
+		global_transform.origin = new_position
