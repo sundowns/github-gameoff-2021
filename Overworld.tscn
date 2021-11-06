@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://world/Overworld.gd" type="Script" id=1]
 [ext_resource path="res://world/props/Cactus.tscn" type="PackedScene" id=2]
@@ -63,6 +63,13 @@ size = Vector3( 1, 0.5, 1 )
 [sub_resource type="BoxShape" id=14]
 extents = Vector3( 0.5, 0.25, 0.5 )
 
+[sub_resource type="SpatialMaterial" id=17]
+albedo_color = Color( 1, 0.933333, 0.388235, 1 )
+
+[sub_resource type="CubeMesh" id=18]
+material = SubResource( 17 )
+size = Vector3( 0.1, 0.1, 0.5 )
+
 [sub_resource type="BoxShape" id=15]
 extents = Vector3( 0.7, 0.5, 0.7 )
 
@@ -76,7 +83,7 @@ script = ExtResource( 1 )
 environment = ExtResource( 12 )
 
 [node name="Camera" type="Camera" parent="."]
-transform = Transform( 1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 3, 6 )
+transform = Transform( 1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 2.96047, 6 )
 current = true
 script = ExtResource( 13 )
 follow_target_path = NodePath("../Entities/Player")
@@ -85,7 +92,6 @@ offset = Vector3( 0, 3, 6 )
 
 [node name="SceneNarrativeHandler" type="Node" parent="."]
 script = ExtResource( 18 )
-disabled = true
 
 [node name="StartDelay" type="Timer" parent="SceneNarrativeHandler"]
 one_shot = true
@@ -109,20 +115,21 @@ follow_target_path = NodePath("../Player")
 [node name="Lights" type="Node" parent="."]
 
 [node name="SpotLight" type="SpotLight" parent="Lights"]
-transform = Transform( 1, 0, 0, 0, 0.514544, 0.857464, 0, -0.857464, 0.514544, 0, 4.873, 3.255 )
+transform = Transform( 1, 0, 0, 0, 0.514544, 0.857464, 0, -0.857464, 0.514544, 0, 4.873, 2.891 )
 light_color = Color( 1, 0.972549, 0.92549, 1 )
 light_energy = 0.52
 spot_range = 61.4
 spot_attenuation = 5.85634
-spot_angle = 23.3
+spot_angle = 12.5
 spot_angle_attenuation = 0.353553
 script = ExtResource( 13 )
 follow_target_path = NodePath("../../Entities/Player")
-smooth_speed = 3.0
-offset = Vector3( 0, 4.873, 3.255 )
+smooth_speed = 7.0
+offset = Vector3( 0, 5.2, 2.8 )
 
 [node name="ToggleableOmniLight" parent="Lights" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 4, -5 )
+start_on = true
 
 [node name="StaticObjects" type="Node" parent="."]
 
@@ -305,6 +312,11 @@ transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -19, 1, -4 )
 [node name="TreeGreen3" parent="StaticObjects" instance=ExtResource( 10 )]
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -15, 1, 1 )
 
+[node name="TorchMeshGrounded" type="MeshInstance" parent="StaticObjects"]
+transform = Transform( 0.458541, 0, 0.888673, 0, 1, 0, -0.888673, 0, 0.458541, 0, 0, 3.48483 )
+mesh = SubResource( 18 )
+material/0 = null
+
 [node name="Triggers" type="Node" parent="."]
 
 [node name="PlayerDetectionArea" parent="Triggers" instance=ExtResource( 14 )]
@@ -323,18 +335,37 @@ shape = SubResource( 15 )
 
 [node name="InteractableArea" parent="Triggers" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.40468, 0.210079, 3.45115 )
-one_shot = true
 
 [node name="CollisionShape" parent="Triggers/InteractableArea" index="0"]
+shape = SubResource( 16 )
+
+[node name="PlayerDetectionArea3" parent="Triggers" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0306406, 0.566033, 3.49321 )
+reactivation_lockout = 2.0
+
+[node name="CollisionShape" parent="Triggers/PlayerDetectionArea3" index="0"]
+shape = SubResource( 15 )
+
+[node name="InteractableArea2" parent="Triggers" instance=ExtResource( 17 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.013711, 0.210079, 3.45115 )
+one_shot = true
+
+[node name="CollisionShape" parent="Triggers/InteractableArea2" index="0"]
 shape = SubResource( 16 )
 
 [connection signal="timeout" from="SceneNarrativeHandler/StartDelay" to="SceneNarrativeHandler" method="_on_StartDelay_timeout"]
 [connection signal="player_entered" from="Triggers/PlayerDetectionArea" to="Lights/ToggleableOmniLight" method="toggle"]
 [connection signal="player_exited" from="Triggers/PlayerDetectionArea" to="Lights/ToggleableOmniLight" method="toggle"]
 [connection signal="player_entered" from="Triggers/PlayerDetectionArea2" to="SceneNarrativeHandler" method="display_callback" flags=3 binds= [ "lamp_button_prompt" ]]
-[connection signal="triggered" from="Triggers/InteractableArea" to="Triggers/PlayerDetectionArea2" method="disable"]
 [connection signal="triggered" from="Triggers/InteractableArea" to="StaticObjects/Lamp/ToggleableSpotLight" method="toggle"]
+[connection signal="triggered" from="Triggers/InteractableArea" to="Triggers/PlayerDetectionArea2" method="disable"]
+[connection signal="player_entered" from="Triggers/PlayerDetectionArea3" to="SceneNarrativeHandler" method="display_callback" flags=3 binds= [ "flashlight_pickup_prompt" ]]
+[connection signal="triggered" from="Triggers/InteractableArea2" to="SceneNarrativeHandler" method="display_callback" flags=3 binds= [ "flashlight_pickup" ]]
+[connection signal="triggered" from="Triggers/InteractableArea2" to="Triggers/PlayerDetectionArea3" method="disable"]
+[connection signal="triggered" from="Triggers/InteractableArea2" to="StaticObjects/TorchMeshGrounded" method="queue_free" flags=3]
 
 [editable path="Triggers/PlayerDetectionArea"]
 [editable path="Triggers/PlayerDetectionArea2"]
 [editable path="Triggers/InteractableArea"]
+[editable path="Triggers/PlayerDetectionArea3"]
+[editable path="Triggers/InteractableArea2"]

@@ -1,16 +1,21 @@
 extends Spatial
 
+onready var camera: Camera = $Camera
 
-# Declare member variables here. Examples:
-# var a: int = 2
-# var b: String = "text"
+onready var player = $Entities/Player
 
+const mouse_look_ray_length := 10000
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-#	pass
+func _physics_process(delta: float) -> void:
+	if player:
+		var space_state = get_world().direct_space_state
+		var mouse_position = get_viewport().get_mouse_position()
+		
+		var ray_origin = camera.project_ray_origin(mouse_position)
+		var ray_end = ray_origin + camera.project_ray_normal(mouse_position) * mouse_look_ray_length
+		
+		var intersection = space_state.intersect_ray(ray_origin, ray_end)
+		
+		if not intersection.empty():
+			player.point_hand_at(intersection.position)
+		

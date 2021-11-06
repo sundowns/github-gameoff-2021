@@ -23,8 +23,10 @@ func _on_StartDelay_timeout() -> void:
 func run_scene_script():
 	if disabled:
 		return
+	narrative.emit_signal("narrative_started")
 	for item in narrative.statements:
 		yield(handle_narrative_item(item), "completed")
+	narrative.emit_signal("narrative_concluded")
 
 func display_callback(dialogue_key: String):
 	if disabled:
@@ -52,3 +54,9 @@ func handle_narrative_item(item):
 			pass #take control from player
 		"end_cutscene":
 			pass #return control to player
+		"item":
+			print('giving item')
+			var player = get_tree().current_scene.get_node("Entities/Player")
+			print(player)
+			player.pickup_item(load(item.item_scene_path).instance())
+			yield(player, "item_picked_up")

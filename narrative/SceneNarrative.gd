@@ -45,7 +45,15 @@ class SignalEmission extends NarrativeItem:
 		node_path=_node_path
 		signal_name=_signal_name
 
+class ItemPickup extends NarrativeItem:
+	var item_scene_path: String
+	func _init(_item_scene_path):
+		type="item"
+		item_scene_path=_item_scene_path
+
+# warning-ignore:unused_signal
 signal narrative_concluded
+# warning-ignore:unused_signal
 signal narrative_started
 
 var scene_callbacks = {}

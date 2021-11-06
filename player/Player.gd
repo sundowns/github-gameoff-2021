@@ -17,6 +17,9 @@ export(float) var interaction_marker_rotation_speed := 5.0
 
 onready var animation_tree: AnimationTree = $AnimationTree
 onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
+onready var hand: Hand = $Hand
+
+signal item_picked_up
 
 func _physics_process(delta: float) -> void:
 	var direction_ground := Vector3(
@@ -60,3 +63,14 @@ func _on_InteractableDetectionZone_area_entered(area: Area) -> void:
 
 func _on_InteractableDetectionZone_area_exited(_area: Area) -> void:
 	current_interactable_area = null
+
+func point_hand_at(to_position: Vector3):
+	var current_height_position = Vector3(to_position.x, hand.global_transform.origin.y, to_position.z)
+	hand.look_at(current_height_position, Vector3.UP)
+
+func pickup_item(item: Node):
+	for child in hand.get_children():
+		child.queue_free() # TODO: drop instead I guess
+	hand.add_child(item)
+	
+	emit_signal("item_picked_up")

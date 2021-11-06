@@ -10,15 +10,22 @@ func _ready():
 			SceneDialogue.new("peter","[color=white][i]I could use this...[/i][/color]"),
 			Wait.new(0.5),
 			SceneDialogue.new("peter","[color=white]welp...[/color]"),
+		],
+		"flashlight_pickup_prompt" : [
+			SceneDialogue.new("peter","[color=white]oooo a torch...[/color]"),
+			SceneDialogue.new("peter","[color=white]convenient!!![/color]"),
+		],
+		"flashlight_pickup": [
+			ItemPickup.new("res://items/FlashLight.tscn")
 		]
 	}
 	
 # This sequence automatically run when the scene loads.
 	statements = [
-		SceneDialogue.new("peter","[color=red]W[color=yellow]O[color=green]A[color=blue]H [color=white]I'm like - [u]totally[/u] bugging out over here man[/color]"),
-		Wait.new(1),
-		SceneDialogue.new("jimmy", "[color=green]....[/color]"),
-		Wait.new(0.5),
-		SceneDialogue.new("jimmy", "[color=green]You can't just say that man[/color]"),
-		SceneDialogue.new("timmy", "[color=pink]u guys r starting to piss me off....[/color]"),
+#		SceneDialogue.new("peter","[color=red]W[color=yellow]O[color=green]A[color=blue]H [color=white]I'm like - [u]totally[/u] bugging out over here man[/color]"),
+#		Wait.new(1),
+#		SceneDialogue.new("jimmy", "[color=green]....[/color]"),
+#		Wait.new(0.5),
+#		SceneDialogue.new("jimmy", "[color=green]You can't just say that man[/color]"),
+#		SceneDialogue.new("timmy", "[color=pink]u guys r starting to piss me off....[/color]"),
 	]

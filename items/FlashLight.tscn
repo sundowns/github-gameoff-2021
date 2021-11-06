@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="SpatialMaterial" id=17]
+albedo_color = Color( 1, 0.933333, 0.388235, 1 )
+
+[sub_resource type="CubeMesh" id=18]
+material = SubResource( 17 )
+size = Vector3( 0.1, 0.1, 0.5 )
+
+[node name="FlashLight" type="Spatial"]
+
+[node name="SpotLight" type="SpotLight" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+mesh = SubResource( 18 )
+material/0 = null
