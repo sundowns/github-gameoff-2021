@@ -3,6 +3,8 @@ class_name SceneNarrativeHandler
 
 onready var narrative = $Narrative
 
+export(bool) var disabled := false
+
 var current_speech_bubbles = {}
 
 func _ready():
@@ -19,10 +21,14 @@ func _on_StartDelay_timeout() -> void:
 	run_scene_script()
 
 func run_scene_script():
+	if disabled:
+		return
 	for item in narrative.statements:
 		yield(handle_narrative_item(item), "completed")
 
 func display_callback(dialogue_key: String):
+	if disabled:
+		return
 	var dialogue_items = narrative.scene_callbacks[dialogue_key]
 	for item in dialogue_items:
 		yield(handle_narrative_item(item), "completed")

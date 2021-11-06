@@ -85,6 +85,7 @@ offset = Vector3( 0, 3, 6 )
 
 [node name="SceneNarrativeHandler" type="Node" parent="."]
 script = ExtResource( 18 )
+disabled = true
 
 [node name="StartDelay" type="Timer" parent="SceneNarrativeHandler"]
 one_shot = true

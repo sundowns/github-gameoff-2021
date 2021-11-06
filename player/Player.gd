@@ -15,8 +15,14 @@ var current_interactable_area: InteractableArea = null
 onready var interactable_marker: Sprite3D = $CanInteractWithShitIndicator
 export(float) var interaction_marker_rotation_speed := 5.0
 
+onready var animation_tree: AnimationTree = $AnimationTree
+onready var sprite: AnimatedSprite3D = $AnimatedSprite3D
+
+
+var delta_position := Vector3.ZERO
 
 func _physics_process(delta: float) -> void:
+	var original_position = global_transform.origin
 	var direction_ground := Vector3(
 		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
 		Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up"), 0).normalized()
@@ -33,6 +39,13 @@ func _physics_process(delta: float) -> void:
 	
 	if is_on_floor() or is_on_ceiling():
 		velocity_y = 0.0
+	
+	delta_position = global_transform.origin - original_position
+	if abs(direction_ground.x) > 0:
+		animation_tree.set("parameters/is_walking/blend_amount", 1)
+		sprite.flip_h = direction_ground.x < 0
+	else:
+		animation_tree.set("parameters/is_walking/blend_amount", 0)
 
 func _process(delta: float) -> void:
 	interactable_marker.visible = current_interactable_area != null and current_interactable_area.can_be_used()

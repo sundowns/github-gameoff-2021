@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://sprites/Peter Spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://player/Player.gd" type="Script" id=2]
@@ -40,24 +40,44 @@ animations = [ {
 [sub_resource type="BoxShape" id=7]
 extents = Vector3( 1, 0.5, 1 )
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=8]
-
-[sub_resource type="AnimationNodeAnimation" id=9]
-
-[sub_resource type="AnimationNodeAnimation" id=10]
+[sub_resource type="AnimationNodeAnimation" id=18]
 animation = "Walk"
 
-[sub_resource type="AnimationNodeBlendTree" id=11]
-graph_offset = Vector2( -1009.84, -21 )
-nodes/BlendSpace2D/node = SubResource( 8 )
-nodes/BlendSpace2D/position = Vector2( -634.842, 202 )
-nodes/Walk_Left/node = SubResource( 9 )
-nodes/Walk_Left/position = Vector2( -440, 240 )
-nodes/Walk_Right/node = SubResource( 10 )
-nodes/Walk_Right/position = Vector2( -440, 60 )
-node_connections = [ "output", 0, "Walk_Right" ]
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "Idle"
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="AnimationNodeBlend2" id=20]
+
+[sub_resource type="AnimationNodeBlendTree" id=11]
+graph_offset = Vector2( -660.533, -195 )
+nodes/Animation/node = SubResource( 19 )
+nodes/Animation/position = Vector2( -440, -40 )
+"nodes/Animation 2/node" = SubResource( 18 )
+"nodes/Animation 2/position" = Vector2( -500, 160 )
+nodes/is_walking/node = SubResource( 20 )
+nodes/is_walking/position = Vector2( -200, -20 )
+node_connections = [ "output", 0, "is_walking", "is_walking", 0, "Animation", "is_walking", 1, "Animation 2" ]
+
+[sub_resource type="Animation" id=17]
+resource_name = "Idle"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite3D:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "Walk"
+length = 0.15
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("AnimatedSprite3D:animation")
 tracks/0/interp = 1
@@ -71,7 +91,7 @@ tracks/0/keys = {
 "values": [ "Walk" ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("AnimatedSprite3D:flip_h")
+tracks/1/path = NodePath("AnimatedSprite3D:playing")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -80,7 +100,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ false ]
+"values": [ true ]
 }
 
 [node name="Player" type="KinematicBody" groups=[
@@ -101,7 +121,7 @@ billboard = 1
 shaded = true
 frames = SubResource( 6 )
 animation = "Walk"
-frame = 1
+frame = 3
 playing = true
 
 [node name="Shadow" parent="." instance=ExtResource( 3 )]
@@ -125,10 +145,11 @@ texture = ExtResource( 4 )
 tree_root = SubResource( 11 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/BlendSpace2D/blend_position = Vector2( 0, 0 )
+parameters/is_walking/blend_amount = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Walk = SubResource( 12 )
+anims/Idle = SubResource( 17 )
+anims/Walk = SubResource( 13 )
 
 [node name="CharacterSpeechBubble" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.37443, 0 )
