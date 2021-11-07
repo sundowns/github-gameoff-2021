@@ -20,10 +20,15 @@ func _ready():
 	
 # This sequence automatically run when the scene loads.
 	statements = [
-		SceneDialogue.new("peter","[color=red]W[color=yellow]O[color=green]A[color=blue]H [color=white]I'm like - [u]totally[/u] bugging out over here man[/color]"),
-		Wait.new(1),
-		SceneDialogue.new("jimmy", "[color=green]....[/color]"),
+		StartCutscene.new(),
+		CameraFollowChangeTween.new("Triggers/DroppedItem", 1),
+		SceneDialogue.new("peter","[color=red]W[color=yellow]O[color=green]A[color=blue]H [color=white]what's over there??[/color]"),
 		Wait.new(0.5),
-		SceneDialogue.new("jimmy", "[color=green]You can't just say that man[/color]"),
+		CameraFollowChangeTween.new("Entities/Player", 1.0),
+		SceneDialogue.new("jimmy", "[color=green]....[/color]", true),
+		Wait.new(0.8),
+		SceneDialogue.new("jimmy", "[color=green]Are you asking me or what?[/color]"),
+		Wait.new(0.5),
+		EndCutscene.new(),
 		SceneDialogue.new("timmy", "[color=pink]u guys r starting to piss me off....[/color]"),
 	]

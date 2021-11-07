@@ -4,6 +4,7 @@ class_name SpeechBubble
 export(String) var character_name
 
 signal on_display_finished
+signal on_text_finished
 
 func _ready():
 	visible = false
@@ -18,7 +19,7 @@ func display(text: String):
 	$Viewport/SpeechBubbleContainer.display_text(text)
 
 func _on_SpeechBubbleContainer_text_finished_displaying() -> void:
-	pass # The text has finished printing
+	emit_signal("on_text_finished")
 
 func _on_SpeechBubbleContainer_speech_bubble_closing() -> void:
 	emit_signal("on_display_finished")

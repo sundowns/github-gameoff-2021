@@ -13,11 +13,26 @@ class Wait extends NarrativeItem:
 class SceneDialogue extends NarrativeItem:
 	var who: String = "peter"
 	var what: String = ""
-	func _init(_who, _what):
+	var end_as_text_ends: bool = false # If false, waits a small period after typing the last character. If true, ends on the last character
+	func _init(_who, _what, _end_as_text_ends=false):
 		type="dialogue"
 		who=_who
 		what=_what
+		end_as_text_ends = _end_as_text_ends
 
+class StartCutscene extends NarrativeItem:
+	var blocking_duration = 0.05
+	func _init(_blocking_duration = 0.05):
+		type="start_cutscene"
+		blocking_duration = _blocking_duration
+
+class EndCutscene extends NarrativeItem:
+	var blocking_duration = 0.05
+	func _init(_blocking_duration = 0.05):
+		type="end_cutscene"
+		blocking_duration = _blocking_duration
+
+# not implemented yet
 class CameraMotionTween extends NarrativeItem:
 	var duration: float = 0.0
 	var from: Transform
@@ -29,14 +44,14 @@ class CameraMotionTween extends NarrativeItem:
 		to=_to
 
 class CameraFollowChangeTween extends NarrativeItem:
+	var to: NodePath
 	var blocking_duration: float = 0.0
-	var from: Node
-	var to: Node
-	func _init(_duration, _from, _to):
+	func _init(_to, _blocking_duration = 0.0):
 		type="camera_follow_change"
-		from=_from
 		to=_to
+		blocking_duration = _blocking_duration
 
+# not implemented yet
 class SignalEmission extends NarrativeItem:
 	var node_path: NodePath
 	var signal_name: String

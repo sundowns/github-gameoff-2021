@@ -11,6 +11,8 @@ export var jump_force := 6.0
 
 var velocity_y := 0.0
 
+var is_frozen := false
+
 var current_interactable_area: InteractableArea = null
 onready var interactable_marker: Sprite3D = $CanInteractWithShitIndicator
 export(float) var interaction_marker_rotation_speed := 5.0
@@ -25,6 +27,9 @@ func _physics_process(delta: float) -> void:
 	var direction_ground := Vector3(
 		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
 		Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up"), 0).normalized()
+	
+	if is_frozen:
+		direction_ground = Vector3.ZERO
 	
 	if not is_on_floor():
 		velocity_y -= gravity * delta
@@ -53,6 +58,8 @@ func _process(delta: float) -> void:
 		interactable_marker.rotation_degrees += Vector3.UP * interaction_marker_rotation_speed * delta
 
 func _unhandled_input(event: InputEvent) -> void:
+	if is_frozen:
+		return
 	if event.is_action_pressed("jump"):
 		velocity_y = jump_force
 	if event.is_action_pressed("use") and current_interactable_area != null:
@@ -74,3 +81,6 @@ func pickup_item(item: Node):
 	hand.add_child(item)
 	
 	emit_signal("item_picked_up")
+
+func _on_SceneNarrativeHandler_cutscene_mode_changed(is_enabled) -> void:
+	is_frozen = is_enabled
