@@ -11,65 +11,65 @@
 extents = Vector3( 0.438125, 0.4, 0.457957 )
 
 [sub_resource type="AtlasTexture" id=2]
-flags = 23
+flags = 20
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 400, 400 )
 
 [sub_resource type="AtlasTexture" id=3]
-flags = 23
+flags = 20
 atlas = ExtResource( 1 )
 region = Rect2( 400, 0, 400, 400 )
 
 [sub_resource type="AtlasTexture" id=4]
-flags = 23
+flags = 20
 atlas = ExtResource( 1 )
 region = Rect2( 800, 0, 400, 400 )
 
 [sub_resource type="AtlasTexture" id=5]
-flags = 23
+flags = 20
 atlas = ExtResource( 1 )
 region = Rect2( 1200, 0, 400, 400 )
 
-[sub_resource type="AtlasTexture" id=21]
-flags = 23
+[sub_resource type="AtlasTexture" id=6]
+flags = 20
 atlas = ExtResource( 1 )
 region = Rect2( 0, 0, 400, 400 )
 
-[sub_resource type="SpriteFrames" id=6]
+[sub_resource type="SpriteFrames" id=7]
 animations = [ {
 "frames": [ SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ) ],
 "loop": true,
 "name": "Walk",
 "speed": 8.0
 }, {
-"frames": [ SubResource( 21 ) ],
+"frames": [ SubResource( 6 ) ],
 "loop": true,
 "name": "Idle",
 "speed": 5.0
 } ]
 
-[sub_resource type="BoxShape" id=7]
+[sub_resource type="BoxShape" id=8]
 extents = Vector3( 1, 0.7, 1 )
 
-[sub_resource type="AnimationNodeAnimation" id=18]
+[sub_resource type="AnimationNodeAnimation" id=9]
 animation = "Walk"
 
-[sub_resource type="AnimationNodeAnimation" id=19]
+[sub_resource type="AnimationNodeAnimation" id=10]
 animation = "Idle"
 
-[sub_resource type="AnimationNodeBlend2" id=20]
+[sub_resource type="AnimationNodeBlend2" id=11]
 
-[sub_resource type="AnimationNodeBlendTree" id=11]
+[sub_resource type="AnimationNodeBlendTree" id=12]
 graph_offset = Vector2( -660.533, -195 )
-nodes/Animation/node = SubResource( 19 )
+nodes/Animation/node = SubResource( 10 )
 nodes/Animation/position = Vector2( -440, -40 )
-"nodes/Animation 2/node" = SubResource( 18 )
+"nodes/Animation 2/node" = SubResource( 9 )
 "nodes/Animation 2/position" = Vector2( -500, 160 )
-nodes/is_walking/node = SubResource( 20 )
+nodes/is_walking/node = SubResource( 11 )
 nodes/is_walking/position = Vector2( -200, -20 )
 node_connections = [ "output", 0, "is_walking", "is_walking", 0, "Animation", "is_walking", 1, "Animation 2" ]
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=13]
 resource_name = "Idle"
 length = 0.1
 loop = true
@@ -98,8 +98,7 @@ tracks/1/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=13]
-resource_name = "Walk"
+[sub_resource type="Animation" id=14]
 length = 0.15
 loop = true
 tracks/0/type = "value"
@@ -139,20 +138,20 @@ tracks/2/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Gradient" id=25]
+[sub_resource type="Gradient" id=15]
 offsets = PoolRealArray( 0, 0.404762, 1 )
 colors = PoolColorArray( 0.894118, 0.831373, 0.741176, 1, 0.796078, 0.686275, 0.529412, 0.647059, 0.670588, 0.623529, 0.552941, 0 )
 
-[sub_resource type="GradientTexture" id=26]
-gradient = SubResource( 25 )
+[sub_resource type="GradientTexture" id=16]
+gradient = SubResource( 15 )
 
-[sub_resource type="Curve" id=27]
+[sub_resource type="Curve" id=17]
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 1.4, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=28]
-curve = SubResource( 27 )
+[sub_resource type="CurveTexture" id=18]
+curve = SubResource( 17 )
 
-[sub_resource type="ParticlesMaterial" id=22]
+[sub_resource type="ParticlesMaterial" id=19]
 emission_shape = 2
 emission_box_extents = Vector3( 0.35, 0.01, 0.15 )
 flag_align_y = true
@@ -160,15 +159,15 @@ direction = Vector3( 0, 1, 0 )
 spread = 10.0
 initial_velocity = 3.0
 scale = 0.6
-scale_curve = SubResource( 28 )
-color_ramp = SubResource( 26 )
+scale_curve = SubResource( 18 )
+color_ramp = SubResource( 16 )
 
-[sub_resource type="SpatialMaterial" id=24]
+[sub_resource type="SpatialMaterial" id=20]
 flags_transparent = true
 vertex_color_use_as_albedo = true
 
-[sub_resource type="CubeMesh" id=23]
-material = SubResource( 24 )
+[sub_resource type="CubeMesh" id=21]
+material = SubResource( 20 )
 size = Vector3( 0.1, 0.1, 0.1 )
 
 [node name="Player" type="KinematicBody" groups=[
@@ -184,19 +183,19 @@ shape = SubResource( 1 )
 
 [node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.633926, 0 )
+layers = 2
 pixel_size = 0.003
 billboard = 1
 shaded = true
-frames = SubResource( 6 )
+frames = SubResource( 7 )
 animation = "Walk"
-frame = 1
 playing = true
 
 [node name="Shadow" parent="." instance=ExtResource( 3 )]
 pixel_size = 0.0017
 
 [node name="Hand" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.396424, 0.0853009 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.396424, 0.287005 )
 script = ExtResource( 6 )
 
 [node name="InteractableDetectionZone" type="Area" parent="."]
@@ -206,7 +205,7 @@ collision_mask = 16
 
 [node name="CollisionShape" type="CollisionShape" parent="InteractableDetectionZone"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.666814, 0 )
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 
 [node name="CanInteractWithShitIndicator" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.73416, 0.259429 )
@@ -214,14 +213,14 @@ pixel_size = 0.0015
 texture = ExtResource( 4 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 11 )
+tree_root = SubResource( 12 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/is_walking/blend_amount = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Idle = SubResource( 17 )
-anims/Walk = SubResource( 13 )
+anims/Idle = SubResource( 13 )
+anims/Walk = SubResource( 14 )
 
 [node name="CharacterSpeechBubble" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.37443, 0 )
@@ -232,8 +231,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.138397, 0 )
 lifetime = 0.6
 randomness = 1.0
 local_coords = false
-process_material = SubResource( 22 )
-draw_pass_1 = SubResource( 23 )
+process_material = SubResource( 19 )
+draw_pass_1 = SubResource( 21 )
 
 [connection signal="area_entered" from="InteractableDetectionZone" to="." method="_on_InteractableDetectionZone_area_entered"]
 [connection signal="area_exited" from="InteractableDetectionZone" to="." method="_on_InteractableDetectionZone_area_exited"]

@@ -19,6 +19,7 @@
 [ext_resource path="res://world/InteractableArea.tscn" type="PackedScene" id=17]
 [ext_resource path="res://narrative/SceneNarrativeHandler.gd" type="Script" id=18]
 [ext_resource path="res://narrative/scenes/test101.gd" type="Script" id=19]
+[ext_resource path="res://items/FlashlightDropped.tscn" type="PackedScene" id=20]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 100, 40, 1 )
@@ -27,13 +28,13 @@ extents = Vector3( 100, 40, 1 )
 size = Vector2( 5000, 150 )
 
 [sub_resource type="CubeMesh" id=3]
-size = Vector3( 0.4, 3, 0.4 )
+size = Vector3( 0.4, 6, 0.4 )
 
 [sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 0.415686, 0.415686, 0.415686, 1 )
 
 [sub_resource type="CubeMesh" id=5]
-size = Vector3( 1, 0.25, 1 )
+size = Vector3( 1.5, 0.25, 1.5 )
 
 [sub_resource type="SpatialMaterial" id=6]
 albedo_color = Color( 0.192157, 0.192157, 0.192157, 1 )
@@ -63,21 +64,18 @@ size = Vector3( 1, 0.5, 1 )
 [sub_resource type="BoxShape" id=14]
 extents = Vector3( 0.5, 0.25, 0.5 )
 
-[sub_resource type="SpatialMaterial" id=17]
-albedo_color = Color( 1, 0.933333, 0.388235, 1 )
+[sub_resource type="BoxShape" id=19]
+extents = Vector3( 300, 1, 300 )
 
-[sub_resource type="CubeMesh" id=18]
-material = SubResource( 17 )
-size = Vector3( 0.1, 0.1, 0.5 )
-
-[sub_resource type="BoxShape" id=15]
+[sub_resource type="BoxShape" id=17]
 extents = Vector3( 0.7, 0.5, 0.7 )
 
-[sub_resource type="BoxShape" id=16]
+[sub_resource type="BoxShape" id=18]
 extents = Vector3( 0.7, 1, 0.7 )
 
 [node name="Overworld" type="Spatial"]
 script = ExtResource( 1 )
+mouse_collision_mask = 32
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource( 12 )
@@ -92,6 +90,7 @@ offset = Vector3( 0, 3, 6 )
 
 [node name="SceneNarrativeHandler" type="Node" parent="."]
 script = ExtResource( 18 )
+narrative_disabled = true
 
 [node name="StartDelay" type="Timer" parent="SceneNarrativeHandler"]
 one_shot = true
@@ -169,23 +168,24 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5056, 0, 2 )
 collision_mask = 0
 
 [node name="Post" type="MeshInstance" parent="StaticObjects/Lamp"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.78215, 0 )
 mesh = SubResource( 3 )
 material/0 = SubResource( 4 )
 
 [node name="LampTop" type="MeshInstance" parent="StaticObjects/Lamp"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.3497, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6603, 0 )
 mesh = SubResource( 5 )
 material/0 = SubResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticObjects/Lamp"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5606, 0 )
 shape = SubResource( 7 )
 
 [node name="ToggleableSpotLight" parent="StaticObjects/Lamp" instance=ExtResource( 16 )]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.19303, 0 )
+transform = Transform( 1, 0, 0, 0, 0.149432, 0.988772, 0, -0.988772, 0.149432, 0, 4.87284, 0.875315 )
 light_color = Color( 1, 0.882353, 0.741176, 1 )
 shadow_enabled = false
+spot_range = 9.9
 spot_angle = 60.0
 start_on = true
 
@@ -312,10 +312,28 @@ transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -19, 1, -4 )
 [node name="TreeGreen3" parent="StaticObjects" instance=ExtResource( 10 )]
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -15, 1, 1 )
 
-[node name="TorchMeshGrounded" type="MeshInstance" parent="StaticObjects"]
-transform = Transform( 0.458541, 0, 0.888673, 0, 1, 0, -0.888673, 0, 0.458541, 0, 0, 3.48483 )
-mesh = SubResource( 18 )
-material/0 = null
+[node name="MouseDetectionLayer" type="StaticBody" parent="StaticObjects"]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticObjects/MouseDetectionLayer"]
+shape = SubResource( 19 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="StaticObjects/MouseDetectionLayer"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 300, 300, 0 )
+shape = SubResource( 19 )
+
+[node name="CollisionShape3" type="CollisionShape" parent="StaticObjects/MouseDetectionLayer"]
+transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -300, 300, 0 )
+shape = SubResource( 19 )
+
+[node name="CollisionShape4" type="CollisionShape" parent="StaticObjects/MouseDetectionLayer"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 300, 300 )
+shape = SubResource( 19 )
+
+[node name="CollisionShape5" type="CollisionShape" parent="StaticObjects/MouseDetectionLayer"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 300, -300 )
+shape = SubResource( 19 )
 
 [node name="Triggers" type="Node" parent="."]
 
@@ -324,34 +342,23 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, 4 )
 reactivation_lockout = 0.0
 
 [node name="CollisionShape" parent="Triggers/PlayerDetectionArea" index="0"]
-shape = SubResource( 15 )
+shape = SubResource( 17 )
 
 [node name="PlayerDetectionArea2" parent="Triggers" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.42161, 0.566033, 3.49321 )
 reactivation_lockout = 2.0
 
 [node name="CollisionShape" parent="Triggers/PlayerDetectionArea2" index="0"]
-shape = SubResource( 15 )
+shape = SubResource( 17 )
 
 [node name="InteractableArea" parent="Triggers" instance=ExtResource( 17 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.40468, 0.210079, 3.45115 )
 
 [node name="CollisionShape" parent="Triggers/InteractableArea" index="0"]
-shape = SubResource( 16 )
+shape = SubResource( 18 )
 
-[node name="PlayerDetectionArea3" parent="Triggers" instance=ExtResource( 14 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0306406, 0.566033, 3.49321 )
-reactivation_lockout = 2.0
-
-[node name="CollisionShape" parent="Triggers/PlayerDetectionArea3" index="0"]
-shape = SubResource( 15 )
-
-[node name="InteractableArea2" parent="Triggers" instance=ExtResource( 17 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.013711, 0.210079, 3.45115 )
-one_shot = true
-
-[node name="CollisionShape" parent="Triggers/InteractableArea2" index="0"]
-shape = SubResource( 16 )
+[node name="DroppedItem" parent="Triggers" instance=ExtResource( 20 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0195807, 4.17307 )
 
 [connection signal="timeout" from="SceneNarrativeHandler/StartDelay" to="SceneNarrativeHandler" method="_on_StartDelay_timeout"]
 [connection signal="player_entered" from="Triggers/PlayerDetectionArea" to="Lights/ToggleableOmniLight" method="toggle"]
@@ -359,13 +366,9 @@ shape = SubResource( 16 )
 [connection signal="player_entered" from="Triggers/PlayerDetectionArea2" to="SceneNarrativeHandler" method="display_callback" flags=3 binds= [ "lamp_button_prompt" ]]
 [connection signal="triggered" from="Triggers/InteractableArea" to="StaticObjects/Lamp/ToggleableSpotLight" method="toggle"]
 [connection signal="triggered" from="Triggers/InteractableArea" to="Triggers/PlayerDetectionArea2" method="disable"]
-[connection signal="player_entered" from="Triggers/PlayerDetectionArea3" to="SceneNarrativeHandler" method="display_callback" flags=3 binds= [ "flashlight_pickup_prompt" ]]
-[connection signal="triggered" from="Triggers/InteractableArea2" to="SceneNarrativeHandler" method="display_callback" flags=3 binds= [ "flashlight_pickup" ]]
-[connection signal="triggered" from="Triggers/InteractableArea2" to="Triggers/PlayerDetectionArea3" method="disable"]
-[connection signal="triggered" from="Triggers/InteractableArea2" to="StaticObjects/TorchMeshGrounded" method="queue_free" flags=3]
+[connection signal="picked_up" from="Triggers/DroppedItem" to="SceneNarrativeHandler" method="display_callback" flags=3 binds= [ "flashlight_pickup" ]]
+[connection signal="touched" from="Triggers/DroppedItem" to="SceneNarrativeHandler" method="display_callback" flags=3 binds= [ "flashlight_pickup_prompt" ]]
 
 [editable path="Triggers/PlayerDetectionArea"]
 [editable path="Triggers/PlayerDetectionArea2"]
 [editable path="Triggers/InteractableArea"]
-[editable path="Triggers/PlayerDetectionArea3"]
-[editable path="Triggers/InteractableArea2"]

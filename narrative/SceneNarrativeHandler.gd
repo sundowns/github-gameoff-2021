@@ -3,7 +3,8 @@ class_name SceneNarrativeHandler
 
 onready var narrative = $Narrative
 
-export(bool) var disabled := false
+export(bool) var narrative_disabled := false
+export(bool) var callbacks_disabled := false
 
 var current_speech_bubbles = {}
 
@@ -21,7 +22,7 @@ func _on_StartDelay_timeout() -> void:
 	run_scene_script()
 
 func run_scene_script():
-	if disabled:
+	if narrative_disabled:
 		return
 	narrative.emit_signal("narrative_started")
 	for item in narrative.statements:
@@ -29,7 +30,7 @@ func run_scene_script():
 	narrative.emit_signal("narrative_concluded")
 
 func display_callback(dialogue_key: String):
-	if disabled:
+	if callbacks_disabled:
 		return
 	var dialogue_items = narrative.scene_callbacks[dialogue_key]
 	for item in dialogue_items:
@@ -55,8 +56,6 @@ func handle_narrative_item(item):
 		"end_cutscene":
 			pass #return control to player
 		"item":
-			print('giving item')
 			var player = get_tree().current_scene.get_node("Entities/Player")
-			print(player)
 			player.pickup_item(load(item.item_scene_path).instance())
 			yield(player, "item_picked_up")

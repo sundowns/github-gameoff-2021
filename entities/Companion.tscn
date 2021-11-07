@@ -22,6 +22,7 @@ shape = SubResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.349511, 0 )
 modulate = Color( 0, 0, 0, 1 )
 billboard = 2
+shaded = true
 texture = ExtResource( 2 )
 
 [node name="ForwardLowerRayCast" type="RayCast" parent="."]

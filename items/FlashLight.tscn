@@ -1,20 +1,22 @@
 [gd_scene load_steps=3 format=2]
 
-[sub_resource type="SpatialMaterial" id=17]
-albedo_color = Color( 1, 0.933333, 0.388235, 1 )
-
-[sub_resource type="CubeMesh" id=18]
-material = SubResource( 17 )
-size = Vector3( 0.1, 0.1, 0.5 )
+[ext_resource path="res://sprites/items.png" type="Texture" id=1]
+[ext_resource path="res://items/Flashlight.gd" type="Script" id=2]
 
 [node name="FlashLight" type="Spatial"]
+script = ExtResource( 2 )
 
 [node name="SpotLight" type="SpotLight" parent="."]
+light_cull_mask = 4294967293
 spot_range = 9.7
 spot_attenuation = 1.07177
 spot_angle = 37.2
 spot_angle_attenuation = 0.901251
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-mesh = SubResource( 18 )
-material/0 = null
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -0.145152 )
+layers = 4
+cast_shadow = 0
+pixel_size = 0.004
+shaded = true
+texture = ExtResource( 1 )
