@@ -2,6 +2,7 @@ extends Node
 class_name SceneNarrativeHandler
 
 onready var narrative = $Narrative
+onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 export(bool) var narrative_disabled := false
 export(bool) var callbacks_disabled := false
@@ -59,3 +60,12 @@ func handle_narrative_item(item):
 			var player = get_tree().current_scene.get_node("Entities/Player")
 			player.pickup_item(load(item.item_scene_path).instance())
 			yield(player, "item_picked_up")
+		"animation":
+			if not animation_player.has_animation(item.animation_key):
+				push_error("Tried to play non existent animation key: %s" % item.animation_key)
+			else:
+				animation_player.play(item.animation_key)
+				if item.wait_to_finish:
+					yield(animation_player, "animation_finished")
+				else:
+					yield(get_tree().create_timer(0.05), "timeout")

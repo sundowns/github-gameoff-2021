@@ -7,7 +7,8 @@ func _ready():
 		# The name of the callback event
 		"lamp_button_prompt": [
 			# The sequence of events that happen in reaction to the event
-			SceneDialogue.new("peter","[color=white][i]I could use this...[/i][/color]")
+			AnimationPlayerSequence.new("SpinThing", false),
+			SceneDialogue.new("peter","[color=white][i]I could use this...[/i][/color]"),
 		],
 		"flashlight_pickup_prompt" : [
 			SceneDialogue.new("peter","[color=white]oooo a torch![/color]")

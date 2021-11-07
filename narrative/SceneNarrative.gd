@@ -51,6 +51,14 @@ class ItemPickup extends NarrativeItem:
 		type="item"
 		item_scene_path=_item_scene_path
 
+class AnimationPlayerSequence extends NarrativeItem:
+	var animation_key: String
+	var wait_to_finish: bool = false
+	func _init(_key, _wait_to_finish):
+		type="animation"
+		animation_key = _key
+		wait_to_finish = _wait_to_finish
+
 # warning-ignore:unused_signal
 signal narrative_concluded
 # warning-ignore:unused_signal
