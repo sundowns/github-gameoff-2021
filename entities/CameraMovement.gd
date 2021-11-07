@@ -12,7 +12,6 @@ enum MovementMode {
 var current_mode: int = MovementMode.FOLLOW
 
 func _physics_process(delta: float) -> void:
-#	print(current_mode)
 	match current_mode:
 		MovementMode.FOLLOW:
 			._physics_process(delta)

@@ -28,11 +28,10 @@ func _ready():
 		Wait.new(0.5),
 		SceneDialogue.new("peter","[color=red]W[color=yellow]O[color=green]A[color=blue]H [color=white]what's over there??[/color]"),
 		Wait.new(0.5),
-		CameraFollowChangeTween.new("Entities/Player", 1.0),
 		SceneDialogue.new("jimmy", "[color=green]....[/color]", true),
-		Wait.new(0.8),
+		Wait.new(0.6),
 		SceneDialogue.new("jimmy", "[color=green]Are you asking me or what?[/color]"),
-		Wait.new(0.5),
+		CameraFollowChangeTween.new("Entities/Player", 0.4),
 		EndCutscene.new(),
 		SceneDialogue.new("timmy", "[color=pink]u guys r starting to piss me off....[/color]"),
 	]
