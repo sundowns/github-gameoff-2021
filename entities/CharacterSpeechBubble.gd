@@ -12,7 +12,7 @@ func _ready():
 	call_deferred("register_self")
 
 func register_self():
-	get_tree().current_scene.get_node("SceneNarrativeHandler").register_new_speech_bubble(self)
+	get_tree().current_scene.find_node("SceneNarrativeHandler").register_new_speech_bubble(self)
 
 func display(text: String):
 	visible = true
