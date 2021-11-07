@@ -32,16 +32,19 @@ class EndCutscene extends NarrativeItem:
 		type="end_cutscene"
 		blocking_duration = _blocking_duration
 
-# not implemented yet
 class CameraMotionTween extends NarrativeItem:
-	var duration: float = 0.0
-	var from: Transform
-	var to: Transform
-	func _init(_duration, _from, _to):
+	var duration: float = 1.0
+	var from: NodePath
+	var to: NodePath
+	var transition_type: int = 0
+	var ease_type: int = 2
+	func _init(_from, _to, _duration = 1.0, _transition_type = 0, _ease_type = 2):
 		type="camera_motion_tween"
 		duration=_duration
 		from=_from
 		to=_to
+		transition_type=_transition_type
+		ease_type=_ease_type
 
 class CameraFollowChangeTween extends NarrativeItem:
 	var to: NodePath

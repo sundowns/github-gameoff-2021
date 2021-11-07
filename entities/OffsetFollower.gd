@@ -5,7 +5,7 @@ class_name OffsetFollower
 
 export(NodePath) var follow_target_path: NodePath = "Player"
 onready var target: Node
-export var smooth_speed: float
+export var smooth_speed: float = 3.0
 export var offset: Vector3
 
 func _ready():
@@ -18,3 +18,4 @@ func set_follow_target(_target: Node):
 func _physics_process(delta: float) -> void:
 	if(target != null):
 		global_transform.origin = lerp(global_transform.origin, target.global_transform.origin + offset, smooth_speed * delta)
+	

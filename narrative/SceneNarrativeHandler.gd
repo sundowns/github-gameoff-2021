@@ -61,7 +61,15 @@ func handle_narrative_item(item):
 				camera_node.set_follow_target(node_to_follow)
 			yield(get_tree().create_timer(item.blocking_duration), "timeout")
 		"camera_motion_tween":
-			pass #Might be a YAGNI on this one for now, probably will be useful but not sure how to do
+			var current_scene = get_tree().current_scene
+			var from_node = current_scene.get_node(item.from)
+			var to_node = current_scene.get_node(item.to)
+			if not from_node or not to_node:
+				push_error("Failed to find 'from' or 'to' nodes for camera motion tween: %s , %s" % [item.from, item.to])
+			else:
+				var camera_node = current_scene.get_node("Camera")
+				camera_node.tween_between_positions(from_node, to_node, item.duration, item.transition_type, item.ease_type)
+				yield(camera_node, "movement_tween_finished")
 		"signal_emit":
 			pass #find a node by key, then emit a signal. Optionally, deferred
 		"start_cutscene":

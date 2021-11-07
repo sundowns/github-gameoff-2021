@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=2]
+[gd_scene load_steps=41 format=2]
 
 [ext_resource path="res://world/Overworld.gd" type="Script" id=1]
 [ext_resource path="res://world/props/Cactus.tscn" type="PackedScene" id=2]
@@ -20,8 +20,10 @@
 [ext_resource path="res://narrative/SceneNarrativeHandler.gd" type="Script" id=18]
 [ext_resource path="res://narrative/scenes/test101.gd" type="Script" id=19]
 [ext_resource path="res://items/FlashlightDropped.tscn" type="PackedScene" id=20]
+[ext_resource path="res://world/CameraAnchor.tscn" type="PackedScene" id=21]
+[ext_resource path="res://entities/CameraMovement.gd" type="Script" id=22]
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=1]
 resource_name = "SpinThing"
 length = 0.5
 tracks/0/type = "value"
@@ -37,50 +39,50 @@ tracks/0/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, 180, 0 ) ]
 }
 
-[sub_resource type="BoxShape" id=1]
+[sub_resource type="BoxShape" id=2]
 extents = Vector3( 100, 40, 1 )
 
-[sub_resource type="PlaneMesh" id=2]
+[sub_resource type="PlaneMesh" id=3]
 size = Vector2( 5000, 150 )
 
-[sub_resource type="CubeMesh" id=3]
+[sub_resource type="CubeMesh" id=4]
 size = Vector3( 0.4, 6, 0.4 )
 
-[sub_resource type="SpatialMaterial" id=4]
+[sub_resource type="SpatialMaterial" id=5]
 albedo_color = Color( 0.415686, 0.415686, 0.415686, 1 )
 
-[sub_resource type="CubeMesh" id=5]
+[sub_resource type="CubeMesh" id=6]
 size = Vector3( 1.5, 0.25, 1.5 )
 
-[sub_resource type="SpatialMaterial" id=6]
+[sub_resource type="SpatialMaterial" id=7]
 albedo_color = Color( 0.192157, 0.192157, 0.192157, 1 )
 
-[sub_resource type="BoxShape" id=7]
+[sub_resource type="BoxShape" id=8]
 extents = Vector3( 0.2, 1.5, 0.2 )
 
-[sub_resource type="CubeMesh" id=8]
+[sub_resource type="CubeMesh" id=9]
 size = Vector3( 8, 0.5, 8 )
 
-[sub_resource type="SpatialMaterial" id=9]
+[sub_resource type="SpatialMaterial" id=10]
 vertex_color_use_as_albedo = true
 albedo_color = Color( 1, 0.705882, 0.14902, 1 )
 
-[sub_resource type="BoxShape" id=10]
+[sub_resource type="BoxShape" id=11]
 extents = Vector3( 4, 0.25, 4 )
 
-[sub_resource type="CubeMesh" id=11]
+[sub_resource type="CubeMesh" id=12]
 size = Vector3( 4, 0.5, 4 )
 
-[sub_resource type="BoxShape" id=12]
+[sub_resource type="BoxShape" id=13]
 extents = Vector3( 2, 0.25, 2 )
 
-[sub_resource type="CubeMesh" id=13]
+[sub_resource type="CubeMesh" id=14]
 size = Vector3( 1, 0.5, 1 )
 
-[sub_resource type="BoxShape" id=14]
+[sub_resource type="BoxShape" id=15]
 extents = Vector3( 0.5, 0.25, 0.5 )
 
-[sub_resource type="BoxShape" id=19]
+[sub_resource type="BoxShape" id=16]
 extents = Vector3( 300, 1, 300 )
 
 [sub_resource type="BoxShape" id=17]
@@ -99,10 +101,11 @@ environment = ExtResource( 12 )
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 2.96047, 6 )
 current = true
-script = ExtResource( 13 )
+script = ExtResource( 22 )
 follow_target_path = NodePath("../Entities/Player")
-smooth_speed = 3.0
-offset = Vector3( 0, 3, 6 )
+offset = Vector3( 0, 2.96, 6 )
+
+[node name="Tween" type="Tween" parent="Camera"]
 
 [node name="SceneNarrativeHandler" type="Node" parent="."]
 script = ExtResource( 18 )
@@ -115,7 +118,7 @@ autostart = true
 script = ExtResource( 19 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="SceneNarrativeHandler"]
-anims/SpinThing = SubResource( 20 )
+anims/SpinThing = SubResource( 1 )
 
 [node name="Entities" type="Node" parent="."]
 
@@ -161,7 +164,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticObjects/BackWall"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="FrontWall" type="StaticBody" parent="StaticObjects"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 29 )
@@ -170,11 +173,11 @@ __meta__ = {
 }
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticObjects/FrontWall"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Background" type="MeshInstance" parent="StaticObjects"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -52 )
-mesh = SubResource( 2 )
+mesh = SubResource( 3 )
 material/0 = null
 __meta__ = {
 "_edit_lock_": true
@@ -189,17 +192,17 @@ collision_mask = 0
 
 [node name="Post" type="MeshInstance" parent="StaticObjects/Lamp"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.78215, 0 )
-mesh = SubResource( 3 )
-material/0 = SubResource( 4 )
+mesh = SubResource( 4 )
+material/0 = SubResource( 5 )
 
 [node name="LampTop" type="MeshInstance" parent="StaticObjects/Lamp"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6603, 0 )
-mesh = SubResource( 5 )
-material/0 = SubResource( 6 )
+mesh = SubResource( 6 )
+material/0 = SubResource( 7 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticObjects/Lamp"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5606, 0 )
-shape = SubResource( 7 )
+shape = SubResource( 8 )
 
 [node name="ToggleableSpotLight" parent="StaticObjects/Lamp" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 0.149432, 0.988772, 0, -0.988772, 0.149432, 0, 4.87284, 0.875315 )
@@ -245,12 +248,12 @@ collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticObjects/Wall7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
-mesh = SubResource( 8 )
-material/0 = SubResource( 9 )
+mesh = SubResource( 9 )
+material/0 = SubResource( 10 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticObjects/Wall7"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
-shape = SubResource( 10 )
+shape = SubResource( 11 )
 
 [node name="Wall13" type="StaticBody" parent="StaticObjects"]
 transform = Transform( -5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, 8, 0.5, 4 )
@@ -258,12 +261,12 @@ collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticObjects/Wall13"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
-mesh = SubResource( 11 )
-material/0 = SubResource( 9 )
+mesh = SubResource( 12 )
+material/0 = SubResource( 10 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticObjects/Wall13"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
-shape = SubResource( 12 )
+shape = SubResource( 13 )
 
 [node name="Wall14" type="StaticBody" parent="StaticObjects"]
 transform = Transform( -5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, 8, 1, 4 )
@@ -271,12 +274,12 @@ collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticObjects/Wall14"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
-mesh = SubResource( 13 )
-material/0 = SubResource( 9 )
+mesh = SubResource( 14 )
+material/0 = SubResource( 10 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticObjects/Wall14"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
-shape = SubResource( 14 )
+shape = SubResource( 15 )
 
 [node name="Prop" parent="StaticObjects" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.509044, -2 )
@@ -341,23 +344,23 @@ collision_layer = 32
 collision_mask = 0
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticObjects/MouseDetectionLayer"]
-shape = SubResource( 19 )
+shape = SubResource( 16 )
 
 [node name="CollisionShape2" type="CollisionShape" parent="StaticObjects/MouseDetectionLayer"]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 300, 300, 0 )
-shape = SubResource( 19 )
+shape = SubResource( 16 )
 
 [node name="CollisionShape3" type="CollisionShape" parent="StaticObjects/MouseDetectionLayer"]
 transform = Transform( -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -300, 300, 0 )
-shape = SubResource( 19 )
+shape = SubResource( 16 )
 
 [node name="CollisionShape4" type="CollisionShape" parent="StaticObjects/MouseDetectionLayer"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 300, 300 )
-shape = SubResource( 19 )
+shape = SubResource( 16 )
 
 [node name="CollisionShape5" type="CollisionShape" parent="StaticObjects/MouseDetectionLayer"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 300, -300 )
-shape = SubResource( 19 )
+shape = SubResource( 16 )
 
 [node name="Triggers" type="Node" parent="."]
 
@@ -383,6 +386,15 @@ shape = SubResource( 18 )
 [node name="DroppedItem" parent="Triggers" instance=ExtResource( 20 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0195807, 4.17307 )
 
+[node name="CameraAnchors" type="Node" parent="."]
+
+[node name="DaddysLittleAnchor" parent="CameraAnchors" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.401, 0.25, 3.407 )
+
+[node name="DaddysBiggerAnchor" parent="CameraAnchors" instance=ExtResource( 21 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4777, 3.83932, 3.407 )
+
+[connection signal="tween_all_completed" from="Camera/Tween" to="Camera" method="_on_Tween_tween_all_completed"]
 [connection signal="cutscene_mode_changed" from="SceneNarrativeHandler" to="Entities/Player" method="_on_SceneNarrativeHandler_cutscene_mode_changed"]
 [connection signal="timeout" from="SceneNarrativeHandler/StartDelay" to="SceneNarrativeHandler" method="_on_StartDelay_timeout"]
 [connection signal="player_entered" from="Triggers/PlayerDetectionArea" to="Lights/ToggleableOmniLight" method="toggle"]

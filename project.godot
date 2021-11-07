@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "OffsetFollower",
+"class": "CameraMovement",
+"language": "GDScript",
+"path": "res://entities/CameraMovement.gd"
+}, {
 "base": "KinematicBody",
 "class": "Companion",
 "language": "GDScript",
@@ -70,6 +75,7 @@ _global_script_classes=[ {
 "path": "res://ui/speech/SpeechBubbleContainer.gd"
 } ]
 _global_script_class_icons={
+"CameraMovement": "",
 "Companion": "",
 "Enums": "",
 "FullWindowViewport": "",
