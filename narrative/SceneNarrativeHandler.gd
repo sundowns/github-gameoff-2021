@@ -39,7 +39,10 @@ func display_callback(dialogue_key: String):
 	for item in dialogue_items:
 		yield(handle_narrative_item(item), "completed")
 
+
 func handle_narrative_item(item):
+	if Global.is_paused:
+		yield(Global, "pause_changed")
 	match item.type:
 		"wait":
 			yield(get_tree().create_timer(item.duration), "timeout")
@@ -52,7 +55,7 @@ func handle_narrative_item(item):
 				else:
 					yield(speaker, "on_display_finished")
 		"camera_follow_change":
-			var current_scene = get_tree().current_scene
+			var current_scene = get_parent()
 			var camera_node = current_scene.get_node("Camera")
 			var node_to_follow = current_scene.get_node(item.to)
 			if not node_to_follow:
@@ -61,7 +64,7 @@ func handle_narrative_item(item):
 				camera_node.set_follow_target(node_to_follow)
 			yield(get_tree().create_timer(item.blocking_duration), "timeout")
 		"camera_motion_tween":
-			var current_scene = get_tree().current_scene
+			var current_scene = get_parent()
 			var from_node = current_scene.get_node(item.from)
 			var to_node = current_scene.get_node(item.to)
 			if not from_node or not to_node:
@@ -79,7 +82,7 @@ func handle_narrative_item(item):
 			emit_signal("cutscene_mode_changed", false)
 			yield(get_tree().create_timer(item.blocking_duration), "timeout")
 		"item":
-			var player = get_tree().current_scene.get_node("Entities/Player")
+			var player = get_parent().get_node("Entities/Player")
 			player.pickup_item(load(item.item_scene_path).instance())
 			yield(player, "item_picked_up")
 		"animation":

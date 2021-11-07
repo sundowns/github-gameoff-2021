@@ -11,7 +11,12 @@ enum MovementMode {
 }
 var current_mode: int = MovementMode.FOLLOW
 
+func _ready():
+	Global.register_subscriber(self, "_on_pause_changed")
+
 func _physics_process(delta: float) -> void:
+	if Global.is_paused:
+		return
 	match current_mode:
 		MovementMode.FOLLOW:
 			._physics_process(delta)
@@ -34,3 +39,11 @@ func _on_Tween_tween_all_completed() -> void:
 func set_follow_target(target):
 	current_mode = MovementMode.FOLLOW
 	.set_follow_target(target)
+
+func _on_pause_changed(is_paused: bool):
+	if is_paused:
+# warning-ignore:return_value_discarded
+		tween.stop_all()
+	else:
+# warning-ignore:return_value_discarded
+		tween.resume_all()
