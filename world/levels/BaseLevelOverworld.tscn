@@ -1,0 +1,140 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://narrative/SceneNarrative.gd" type="Script" id=1]
+[ext_resource path="res://player/Player.gd" type="Script" id=2]
+[ext_resource path="res://world/Overworld.gd" type="Script" id=3]
+[ext_resource path="res://entities/Companion.gd" type="Script" id=4]
+[ext_resource path="res://entities/CameraMovement.gd" type="Script" id=5]
+[ext_resource path="res://entities/OffsetFollower.gd" type="Script" id=6]
+[ext_resource path="res://world/WorldEnvironmentAutoloader.gd" type="Script" id=7]
+[ext_resource path="res://world/environments/bright_world_environment.tres" type="Environment" id=8]
+[ext_resource path="res://narrative/SceneNarrativeHandler.gd" type="Script" id=9]
+[ext_resource path="res://world/MouseDetectionLayer.tscn" type="PackedScene" id=12]
+[ext_resource path="res://entities/TinyTimmy.tscn" type="PackedScene" id=15]
+[ext_resource path="res://entities/LilJimmy.tscn" type="PackedScene" id=18]
+[ext_resource path="res://world/Floor.tscn" type="PackedScene" id=19]
+[ext_resource path="res://player/Player.tscn" type="PackedScene" id=20]
+
+[sub_resource type="Animation" id=1]
+resource_name = "SpinThing"
+length = 0.5
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 100, 40, 1 )
+
+[sub_resource type="PlaneMesh" id=3]
+size = Vector2( 5000, 150 )
+
+[node name="OverworldLevel" type="Spatial"]
+script = ExtResource( 3 )
+mouse_collision_mask = 32
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+script = ExtResource( 7 )
+world_env = ExtResource( 8 )
+
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 2.96047, 6 )
+current = true
+script = ExtResource( 5 )
+follow_target_path = NodePath("../Entities/Player")
+offset = Vector3( 0, 2.96, 6 )
+
+[node name="Tween" type="Tween" parent="Camera"]
+
+[node name="SceneNarrativeHandler" type="Node" parent="."]
+script = ExtResource( 9 )
+
+[node name="StartDelay" type="Timer" parent="SceneNarrativeHandler"]
+one_shot = true
+autostart = true
+
+[node name="Narrative" type="Node" parent="SceneNarrativeHandler"]
+script = ExtResource( 1 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SceneNarrativeHandler"]
+anims/SpinThing = SubResource( 1 )
+
+[node name="Entities" type="Node" parent="."]
+
+[node name="Player" type="KinematicBody" parent="Entities" groups=[
+"Player",
+] instance=ExtResource( 20 )]
+collision_layer = 2
+script = ExtResource( 2 )
+interaction_marker_rotation_speed = 250.0
+
+[node name="TinyTimmy" type="KinematicBody" parent="Entities" groups=[
+"Companion",
+] instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0 )
+collision_layer = 4
+script = ExtResource( 4 )
+follow_target_path = NodePath("../LilJimmy")
+
+[node name="LilJimmy" type="KinematicBody" parent="Entities" groups=[
+"Companion",
+] instance=ExtResource( 18 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
+collision_layer = 4
+script = ExtResource( 4 )
+follow_target_path = NodePath("../Player")
+
+[node name="Lights" type="Node" parent="."]
+
+[node name="SpotLight" type="SpotLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, 0.514544, 0.857464, 0, -0.857464, 0.514544, 0, 4.873, 2.891 )
+light_color = Color( 1, 0.972549, 0.92549, 1 )
+light_energy = 0.52
+spot_range = 61.4
+spot_attenuation = 5.85634
+spot_angle = 12.5
+spot_angle_attenuation = 0.353553
+script = ExtResource( 6 )
+follow_target_path = NodePath("../../Entities/Player")
+smooth_speed = 7.0
+offset = Vector3( 0, 5.2, 2.8 )
+
+[node name="StaticObjects" type="Node" parent="."]
+
+[node name="Floor" type="StaticBody" parent="StaticObjects" instance=ExtResource( 19 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="BackWall" type="StaticBody" parent="StaticObjects"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -30 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticObjects/BackWall"]
+shape = SubResource( 2 )
+
+[node name="FrontWall" type="StaticBody" parent="StaticObjects"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 29 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticObjects/FrontWall"]
+shape = SubResource( 2 )
+
+[node name="Background" type="MeshInstance" parent="StaticObjects"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -52 )
+mesh = SubResource( 3 )
+material/0 = null
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="MouseDetectionLayer" parent="StaticObjects" instance=ExtResource( 12 )]
+
+[node name="Triggers" type="Node" parent="."]
+
+[node name="CameraAnchors" type="Node" parent="."]
+
+[connection signal="tween_all_completed" from="Camera/Tween" to="Camera" method="_on_Tween_tween_all_completed"]
+[connection signal="cutscene_mode_changed" from="SceneNarrativeHandler" to="Entities/Player" method="_on_SceneNarrativeHandler_cutscene_mode_changed"]
+[connection signal="timeout" from="SceneNarrativeHandler/StartDelay" to="SceneNarrativeHandler" method="_on_StartDelay_timeout"]

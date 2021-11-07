@@ -32,9 +32,9 @@ func _unhandled_input(event):
 	if event.is_action_pressed("ui_cancel"):
 		Global.toggle_pause()
 	if Global.is_paused:
-		if event.is_action_pressed("ui_up"):
+		if event.is_action_pressed("ui_left"):
 			change_selection_to(current_selection - 1)
-		elif event.is_action_pressed("ui_down"):
+		elif event.is_action_pressed("ui_right"):
 			change_selection_to(current_selection + 1)
 		elif event.is_action("ui_accept"):
 			activate_menu_option(item_list.get_item_text(current_selection))

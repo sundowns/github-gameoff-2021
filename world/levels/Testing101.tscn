@@ -1,0 +1,267 @@
+[gd_scene load_steps=30 format=2]
+
+[ext_resource path="res://world/levels/BaseLevelOverworld.tscn" type="PackedScene" id=1]
+[ext_resource path="res://world/environments/dark_world_environment.tres" type="Environment" id=2]
+[ext_resource path="res://narrative/scenes/test101.gd" type="Script" id=3]
+[ext_resource path="res://world/props/Tent.tscn" type="PackedScene" id=8]
+[ext_resource path="res://world/Wall.tscn" type="PackedScene" id=9]
+[ext_resource path="res://world/ToggleableSpotLight.tscn" type="PackedScene" id=10]
+[ext_resource path="res://items/FlashlightDropped.tscn" type="PackedScene" id=11]
+[ext_resource path="res://world/props/Cactus.tscn" type="PackedScene" id=12]
+[ext_resource path="res://world/ToggleableOmniLight.tscn" type="PackedScene" id=13]
+[ext_resource path="res://world/PlayerDetectionArea.tscn" type="PackedScene" id=14]
+[ext_resource path="res://world/InteractableArea.tscn" type="PackedScene" id=15]
+[ext_resource path="res://world/CameraAnchor.tscn" type="PackedScene" id=16]
+[ext_resource path="res://world/props/LogStack.tscn" type="PackedScene" id=17]
+[ext_resource path="res://world/props/Tree.tscn" type="PackedScene" id=18]
+[ext_resource path="res://world/props/TreeGreen.tscn" type="PackedScene" id=19]
+
+[sub_resource type="CubeMesh" id=19]
+size = Vector3( 0.4, 6, 0.4 )
+
+[sub_resource type="SpatialMaterial" id=20]
+albedo_color = Color( 0.415686, 0.415686, 0.415686, 1 )
+
+[sub_resource type="CubeMesh" id=21]
+size = Vector3( 1.5, 0.25, 1.5 )
+
+[sub_resource type="SpatialMaterial" id=22]
+albedo_color = Color( 0.192157, 0.192157, 0.192157, 1 )
+
+[sub_resource type="BoxShape" id=23]
+extents = Vector3( 0.2, 1.5, 0.2 )
+
+[sub_resource type="CubeMesh" id=24]
+size = Vector3( 8, 0.5, 8 )
+
+[sub_resource type="SpatialMaterial" id=25]
+vertex_color_use_as_albedo = true
+albedo_color = Color( 1, 0.705882, 0.14902, 1 )
+
+[sub_resource type="BoxShape" id=26]
+extents = Vector3( 4, 0.25, 4 )
+
+[sub_resource type="CubeMesh" id=27]
+size = Vector3( 4, 0.5, 4 )
+
+[sub_resource type="BoxShape" id=28]
+extents = Vector3( 2, 0.25, 2 )
+
+[sub_resource type="CubeMesh" id=29]
+size = Vector3( 1, 0.5, 1 )
+
+[sub_resource type="BoxShape" id=30]
+extents = Vector3( 0.5, 0.25, 0.5 )
+
+[sub_resource type="BoxShape" id=17]
+extents = Vector3( 0.7, 0.5, 0.7 )
+
+[sub_resource type="BoxShape" id=18]
+extents = Vector3( 0.7, 1, 0.7 )
+
+[node name="OverworldLevel" instance=ExtResource( 1 )]
+
+[node name="WorldEnvironment" parent="." index="0"]
+world_env = ExtResource( 2 )
+
+[node name="StartDelay" parent="SceneNarrativeHandler" index="0"]
+wait_time = 0.5
+
+[node name="Narrative" parent="SceneNarrativeHandler" index="1"]
+script = ExtResource( 3 )
+
+[node name="ToggleableOmniLight" parent="Lights" index="1" instance=ExtResource( 13 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 7.39182, -5 )
+light_color = Color( 1, 0.937255, 0.823529, 1 )
+omni_range = 13.9
+start_on = true
+
+[node name="TreeGreen3" parent="StaticObjects" index="5" instance=ExtResource( 19 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -15, 1, 1 )
+
+[node name="Wall" parent="StaticObjects" index="6" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -2 )
+
+[node name="Lamp" type="StaticBody" parent="StaticObjects" index="7"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.5056, 0, 2 )
+collision_mask = 0
+
+[node name="Post" type="MeshInstance" parent="StaticObjects/Lamp" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.78215, 0 )
+mesh = SubResource( 19 )
+material/0 = SubResource( 20 )
+
+[node name="LampTop" type="MeshInstance" parent="StaticObjects/Lamp" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6603, 0 )
+mesh = SubResource( 21 )
+material/0 = SubResource( 22 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticObjects/Lamp" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5606, 0 )
+shape = SubResource( 23 )
+
+[node name="ToggleableSpotLight" parent="StaticObjects/Lamp" index="3" instance=ExtResource( 10 )]
+transform = Transform( 1, 0, 0, 0, 0.149432, 0.988772, 0, -0.988772, 0.149432, 0, 4.87284, 0.875315 )
+light_color = Color( 1, 0.937255, 0.823529, 1 )
+spot_range = 9.9
+spot_angle = 60.0
+start_on = true
+
+[node name="Wall5" parent="StaticObjects" index="8" instance=ExtResource( 9 )]
+transform = Transform( 1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -2, 2, -4 )
+
+[node name="Wall6" parent="StaticObjects" index="9" instance=ExtResource( 9 )]
+transform = Transform( 1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 1, 2, -4 )
+
+[node name="Wall8" parent="StaticObjects" index="10" instance=ExtResource( 9 )]
+transform = Transform( 1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 4, 2, -4 )
+
+[node name="Wall9" parent="StaticObjects" index="11" instance=ExtResource( 9 )]
+transform = Transform( 1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 3, 2, -7 )
+
+[node name="Wall10" parent="StaticObjects" index="12" instance=ExtResource( 9 )]
+transform = Transform( 1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -1, 2, -7 )
+
+[node name="Wall11" parent="StaticObjects" index="13" instance=ExtResource( 9 )]
+transform = Transform( 1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 16, 2, 2 )
+
+[node name="Wall2" parent="StaticObjects" index="14" instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, -2 )
+
+[node name="Wall3" parent="StaticObjects" index="15" instance=ExtResource( 9 )]
+transform = Transform( -0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, -3, 0, 3 )
+
+[node name="Wall12" parent="StaticObjects" index="16" instance=ExtResource( 9 )]
+transform = Transform( -0.707107, 0, 0.707107, 0, 1, 0, -0.707107, 0, -0.707107, 7, 0, 13 )
+
+[node name="Wall4" parent="StaticObjects" index="17" instance=ExtResource( 9 )]
+transform = Transform( -5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, 2, 0, 4 )
+
+[node name="Wall7" type="StaticBody" parent="StaticObjects" index="18"]
+transform = Transform( -5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, 8, 0, 4 )
+collision_mask = 0
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticObjects/Wall7" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
+mesh = SubResource( 24 )
+material/0 = SubResource( 25 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticObjects/Wall7" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
+shape = SubResource( 26 )
+
+[node name="Wall13" type="StaticBody" parent="StaticObjects" index="19"]
+transform = Transform( -5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, 8, 0.5, 4 )
+collision_mask = 0
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticObjects/Wall13" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
+mesh = SubResource( 27 )
+material/0 = SubResource( 25 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticObjects/Wall13" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
+shape = SubResource( 28 )
+
+[node name="Wall14" type="StaticBody" parent="StaticObjects" index="20"]
+transform = Transform( -5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, 8, 1, 4 )
+collision_mask = 0
+
+[node name="MeshInstance" type="MeshInstance" parent="StaticObjects/Wall14" index="0"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
+mesh = SubResource( 29 )
+material/0 = SubResource( 25 )
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticObjects/Wall14" index="1"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
+shape = SubResource( 30 )
+
+[node name="Prop" parent="StaticObjects" index="21" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.509044, -2 )
+
+[node name="Prop14" parent="StaticObjects" index="22" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.42582, -0.00256807, 3.47181 )
+
+[node name="Prop2" parent="StaticObjects" index="23" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.90477, 0.509044, -2 )
+
+[node name="Prop3" parent="StaticObjects" index="24" instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2523, 0.509044, -2 )
+
+[node name="Prop4" parent="StaticObjects" index="25" instance=ExtResource( 12 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 2, -1.252, 0, 7.304 )
+
+[node name="Prop5" parent="StaticObjects" index="26" instance=ExtResource( 17 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -6, 0, 6.2413 )
+
+[node name="Prop6" parent="StaticObjects" index="27" instance=ExtResource( 8 )]
+transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 1, -15, 0, 4 )
+
+[node name="Prop7" parent="StaticObjects" index="28" instance=ExtResource( 18 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -11, 0, 8 )
+
+[node name="Prop10" parent="StaticObjects" index="29" instance=ExtResource( 18 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -15, 0, -5 )
+
+[node name="Prop9" parent="StaticObjects" index="30" instance=ExtResource( 18 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -18, 0, 4 )
+
+[node name="Prop8" parent="StaticObjects" index="31" instance=ExtResource( 18 )]
+transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -9.61303, 0, 2.39756 )
+
+[node name="Prop11" parent="StaticObjects" index="32" instance=ExtResource( 18 )]
+transform = Transform( 2.5, 0, 0, 0, 2.5, 0, 0, 0, 1, -17, 0, -1 )
+
+[node name="Prop12" parent="StaticObjects" index="33" instance=ExtResource( 18 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, -12, 0, -1 )
+
+[node name="Prop13" parent="StaticObjects" index="34" instance=ExtResource( 18 )]
+transform = Transform( 2.5, 0, 0, 0, 2.5, 0, 0, 0, 1, -20, 0, 7 )
+
+[node name="TreeGreen" parent="StaticObjects" index="35" instance=ExtResource( 19 )]
+transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 1, -22, 1, 1 )
+
+[node name="TreeGreen4" parent="StaticObjects" index="36" instance=ExtResource( 19 )]
+transform = Transform( 2, 0, 0, 0, 2, 0, 0, 0, 1, -17, 0.553017, 8 )
+
+[node name="TreeGreen2" parent="StaticObjects" index="37" instance=ExtResource( 19 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -19, 1, -4 )
+
+[node name="PlayerDetectionArea" parent="Triggers" index="0" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, 4 )
+reactivation_lockout = 0.0
+
+[node name="CollisionShape" parent="Triggers/PlayerDetectionArea" index="0"]
+shape = SubResource( 17 )
+
+[node name="PlayerDetectionArea2" parent="Triggers" index="1" instance=ExtResource( 14 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.42161, 0.566033, 3.49321 )
+
+[node name="CollisionShape" parent="Triggers/PlayerDetectionArea2" index="0"]
+shape = SubResource( 17 )
+
+[node name="InteractableArea" parent="Triggers" index="2" instance=ExtResource( 15 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.40468, 0.210079, 3.45115 )
+
+[node name="CollisionShape" parent="Triggers/InteractableArea" index="0"]
+shape = SubResource( 18 )
+
+[node name="DroppedItem" parent="Triggers" index="3" instance=ExtResource( 11 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0195807, 4.17307 )
+
+[node name="DaddysLittleAnchor" parent="CameraAnchors" index="0" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0228238, 0.25, 4.51849 )
+
+[node name="DaddysBiggerAnchor" parent="CameraAnchors" index="1" instance=ExtResource( 16 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4777, 3.83932, 3.407 )
+
+[connection signal="player_entered" from="Triggers/PlayerDetectionArea" to="Lights/ToggleableOmniLight" method="toggle"]
+[connection signal="player_entered" from="Triggers/PlayerDetectionArea2" to="SceneNarrativeHandler" method="display_callback" flags=3 binds= [ "lamp_button_prompt" ]]
+[connection signal="triggered" from="Triggers/InteractableArea" to="StaticObjects/Lamp/ToggleableSpotLight" method="toggle"]
+[connection signal="picked_up" from="Triggers/DroppedItem" to="SceneNarrativeHandler" method="display_callback" flags=3 binds= [ "flashlight_pickup" ]]
+[connection signal="touched" from="Triggers/DroppedItem" to="SceneNarrativeHandler" method="display_callback" flags=3 binds= [ "flashlight_pickup_prompt" ]]
+
+[editable path="StaticObjects/Prop8"]
+[editable path="Triggers/PlayerDetectionArea"]
+[editable path="Triggers/PlayerDetectionArea2"]
+[editable path="Triggers/InteractableArea"]
