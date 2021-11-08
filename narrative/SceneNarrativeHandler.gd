@@ -35,10 +35,19 @@ func run_scene_script():
 func display_callback(dialogue_key: String):
 	if callbacks_disabled:
 		return
-	var dialogue_items = narrative.scene_callbacks[dialogue_key]
+	var dialogue_items = []
+	if narrative.scene_callbacks.has(dialogue_key):
+		dialogue_items = narrative.scene_callbacks[dialogue_key]
+	elif narrative.universal_callbacks.has(dialogue_key):
+		dialogue_items = narrative.universal_callbacks[dialogue_key]
 	for item in dialogue_items:
 		yield(handle_narrative_item(item), "completed")
 
+func item_pickup(key: String):
+	display_callback("_%s_pickup" % key)
+
+func item_pickup_prompt(key: String):
+	display_callback("_%s_pickup_prompt" % key)
 
 func handle_narrative_item(item):
 	if Global.is_paused:

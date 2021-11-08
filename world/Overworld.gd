@@ -10,7 +10,6 @@ export(int, LAYERS_3D_PHYSICS) var mouse_collision_mask
 
 func _ready():
 	call_deferred('connect_signals')
-#	connect_signals()
 
 func _physics_process(_delta: float) -> void:
 	if player:
@@ -27,7 +26,7 @@ func _physics_process(_delta: float) -> void:
 		
 
 func connect_signals():
-	Global.register_subscriber(self, "_on_pause_changed")
+	Global.register_pause_subscriber(self, "_on_pause_changed")
 
 func _on_pause_changed(new_value):
 	get_tree().paused = new_value

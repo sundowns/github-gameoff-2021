@@ -12,7 +12,7 @@ enum MovementMode {
 var current_mode: int = MovementMode.FOLLOW
 
 func _ready():
-	Global.register_subscriber(self, "_on_pause_changed")
+	Global.register_pause_subscriber(self, "_on_pause_changed")
 
 func _physics_process(delta: float) -> void:
 	if Global.is_paused:

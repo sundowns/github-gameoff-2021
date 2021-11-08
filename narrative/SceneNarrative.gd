@@ -84,6 +84,14 @@ signal narrative_started
 
 var scene_callbacks = {}
 var statements := []
+var universal_callbacks = {
+	"_flashlight_pickup_prompt" : [
+			SceneDialogue.new("peter","[color=white]oooo a torch![/color]")
+		],
+	"_flashlight_pickup": [
+		ItemPickup.new("res://items/Flashlight.tscn")
+	]
+}
 
 func _ready():
 	scene_callbacks = {}

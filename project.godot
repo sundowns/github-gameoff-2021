@@ -107,10 +107,6 @@ window/size/height=1080
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_width"
 
-[editor_plugins]
-
-enabled=PoolStringArray( "res://addons/EXP-System-Dialog/plugin.cfg" )
-
 [global]
 
 Physics=false
@@ -197,20 +193,3 @@ common/enable_pause_aware_picking=true
 quality/filters/msaa=3
 environment/default_environment="res://default_env.tres"
 quality/dynamic_fonts/use_oversampling=false
-
-[textalog]
-
-events/logic_event/change_timeline="res://addons/dialog_plugin/Resources/Events/LogicEvent/ChangeTimelineEvent/ChangeTiemlineEvent.gd"
-events/character_event/character_change_expression="res://addons/dialog_plugin/Resources/Events/CharacterEvent/ChangeExpressionEvent/CharacterChangeExpressionEvent.gd"
-events/character_event/character_join="res://addons/dialog_plugin/Resources/Events/CharacterEvent/JoinEvent/CharacterJoinEvent.gd"
-events/character_event/character_leave="res://addons/dialog_plugin/Resources/Events/CharacterEvent/LeaveEvent/CharacterLeaveEvent.gd"
-events/miscelaneous_event/custom="res://addons/dialog_plugin/Resources/Events/MiscelaneousEvent/CustomEvent/CustomEvent.gd"
-events/logic_event/emit_signal="res://addons/dialog_plugin/Resources/Events/LogicEvent/EmitSignalEvent/EmitSignalEvent.gd"
-events/logic_event/jump_to="res://addons/dialog_plugin/Resources/Events/LogicEvent/JumpToEvent/JumpToEvent.gd"
-events/logic_event/question="res://addons/dialog_plugin/Resources/Events/LogicEvent/QuestionEvent/QuestionEvent.gd"
-events/text_event/text="res://addons/dialog_plugin/Resources/Events/TextEvent/TextEvent.gd"
-events/text_event/text_with_audio="res://addons/dialog_plugin/Resources/Events/TextEvent/TextAudioEvent/TextAudioEvent.gd"
-events/logic_event/wait_time="res://addons/dialog_plugin/Resources/Events/LogicEvent/WaitTimeEvent/WaitTimeEvent.gd"
-events/logic_event/condition="res://addons/dialog_plugin/Resources/Events/LogicEvent/ConditionEvent/ConditionEvent.gd"
-events/miscelaneous_event/comment="res://addons/dialog_plugin/Resources/Events/MiscelaneousEvent/Comment/CommentEvent.gd"
-events/logic_event/set="res://addons/dialog_plugin/Resources/Events/LogicEvent/SetEvent/SetEvent.gd"

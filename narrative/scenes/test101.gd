@@ -9,12 +9,6 @@ func _ready():
 			# The sequence of events that happen in reaction to the event
 			AnimationPlayerSequence.new("SpinThing", false),
 			SceneDialogue.new("peter","[color=white][i]I could use this...[/i][/color]"),
-		],
-		"flashlight_pickup_prompt" : [
-			SceneDialogue.new("peter","[color=white]oooo a torch![/color]")
-		],
-		"flashlight_pickup": [
-			ItemPickup.new("res://items/Flashlight.tscn")
 		]
 	}
 	

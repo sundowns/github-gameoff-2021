@@ -19,6 +19,6 @@ one_shot = true
 [node name="ActivateAfter" type="Timer" parent="."]
 
 [connection signal="player_entered" from="PlayerDetectionArea" to="." method="_on_PlayerDetectionArea_player_entered"]
-[connection signal="triggered" from="InteractableArea" to="." method="_on_InteractableArea_triggered"]
 [connection signal="triggered" from="InteractableArea" to="PlayerDetectionArea" method="disable"]
+[connection signal="triggered" from="InteractableArea" to="." method="_on_InteractableArea_triggered"]
 [connection signal="timeout" from="ActivateAfter" to="." method="_on_ActivateAfter_timeout"]

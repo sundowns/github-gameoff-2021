@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://world/OverworldTransitionZone.gd" type="Script" id=1]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 1, 0.5, 2 )
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 2, 1, 4 )
+
+[sub_resource type="SpatialMaterial" id=3]
+flags_transparent = true
+albedo_color = Color( 1, 0, 0, 0.0980392 )
+
+[node name="OverworldTransitionZone" type="Area"]
+monitorable = false
+collision_layer = 0
+collision_mask = 2
+script = ExtResource( 1 )
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.62558, 0 )
+shape = SubResource( 1 )
+
+[node name="DebugMeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.626, 0 )
+visible = false
+mesh = SubResource( 2 )
+material/0 = SubResource( 3 )
+
+[connection signal="body_entered" from="." to="." method="_on_OverworldTransitionZone_body_entered"]

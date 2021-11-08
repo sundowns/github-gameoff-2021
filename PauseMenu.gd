@@ -12,7 +12,7 @@ func _ready():
 	visible = Global.is_paused
 
 func connect_signals():
-	Global.register_subscriber(self, "_on_pause_changed")
+	Global.register_pause_subscriber(self, "_on_pause_changed")
 
 func _on_ItemList_item_activated(index):
 	activate_menu_option(item_list.get_item_text(index))
