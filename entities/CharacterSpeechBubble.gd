@@ -12,7 +12,7 @@ func _ready():
 	call_deferred("register_self")
 
 func register_self():
-	get_tree().current_scene.get_node("ViewportContainer/Viewport/OverworldLevel/SceneNarrativeHandler").register_new_speech_bubble(self)
+	get_tree().current_scene.get_node(Global.narrative_handler_scenepath).register_new_speech_bubble(self)
 
 func display(text: String):
 	visible = true

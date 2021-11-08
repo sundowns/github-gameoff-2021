@@ -12,7 +12,7 @@ func _ready():
 	call_deferred('connect_signals')
 
 func _physics_process(_delta: float) -> void:
-	if player:
+	if player and not player.is_frozen:
 		var space_state = get_world().direct_space_state
 		var mouse_position = get_viewport().get_mouse_position()
 		

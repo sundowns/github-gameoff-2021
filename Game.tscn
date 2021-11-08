@@ -1,10 +1,26 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://ui/FullWindowViewport.gd" type="Script" id=1]
 [ext_resource path="res://Game.gd" type="Script" id=2]
 [ext_resource path="res://ui/PauseMenu.tscn" type="PackedScene" id=3]
 [ext_resource path="res://world/LevelPlaceHolder.gd" type="Script" id=4]
 [ext_resource path="res://world/levels/Testing101.tscn" type="PackedScene" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "WorldSlideOut"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("ViewportContainer/Viewport/WorldAnchor:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, -20, 0 ) ]
+}
 
 [node name="Game" type="Spatial"]
 script = ExtResource( 2 )
@@ -26,6 +42,14 @@ size = Vector2( 1920, 1080 )
 handle_input_locally = false
 render_target_update_mode = 3
 
-[node name="LevelPlaceHolder" type="Node" parent="ViewportContainer/Viewport"]
+[node name="WorldAnchor" type="Spatial" parent="ViewportContainer/Viewport"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -20, 0 )
+
+[node name="LevelPlaceHolder" type="Node" parent="ViewportContainer/Viewport/WorldAnchor"]
 script = ExtResource( 4 )
 start_level = ExtResource( 5 )
+
+[node name="LoadingCamera" type="Camera" parent="ViewportContainer/Viewport"]
+
+[node name="LoadingAnimationPlayer" type="AnimationPlayer" parent="."]
+anims/WorldSlideOut = SubResource( 1 )
