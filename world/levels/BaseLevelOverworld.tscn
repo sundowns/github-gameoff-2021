@@ -16,13 +16,13 @@
 resource_name = "SpinThing"
 length = 0.5
 
-[sub_resource type="BoxShape" id=4]
+[sub_resource type="BoxShape" id=2]
 extents = Vector3( 100, 1, 30 )
 
-[sub_resource type="CubeMesh" id=2]
+[sub_resource type="CubeMesh" id=3]
 size = Vector3( 200, 2, 60 )
 
-[sub_resource type="SpatialMaterial" id=7]
+[sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 0.129412, 0.0862745, 0.00784314, 1 )
 
 [sub_resource type="BoxShape" id=5]
@@ -94,11 +94,11 @@ offset = Vector3( 0, 5.2, 2.8 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticObjects/Floor"]
-shape = SubResource( 4 )
+shape = SubResource( 2 )
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticObjects/Floor"]
-mesh = SubResource( 2 )
-material/0 = SubResource( 7 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
 
 [node name="BackWall" type="StaticBody" parent="StaticObjects"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -30 )

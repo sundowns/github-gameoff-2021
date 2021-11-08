@@ -12,8 +12,6 @@ func _ready():
 	call_deferred("register_self")
 
 func register_self():
-	var thing = get_tree().current_scene
-	print(thing)
 	get_tree().current_scene.get_node("ViewportContainer/Viewport/OverworldLevel/SceneNarrativeHandler").register_new_speech_bubble(self)
 
 func display(text: String):

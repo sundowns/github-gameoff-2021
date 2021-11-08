@@ -8,27 +8,21 @@ func _ready():
 	Global.register_levelchange_subscriber(self, "change_overworld_level")
 
 func change_overworld_level(scene: PackedScene):
-	print('loading new level: %s' % scene)
-
+	var held_items = []
 	var existing_overworld = level_container_viewport.get_child(0)
 	if existing_overworld:
+		# Grab anything the player is holding and remove from the tree
+		var player_items_branch = level_container_viewport.get_node("OverworldLevel/Entities/Player/Hand")
+		for child in player_items_branch.get_children():
+			player_items_branch.remove_child(child)
+			held_items.append(child)
 		level_container_viewport.remove_child(existing_overworld)
 		existing_overworld.queue_free()
 	
 	var new_scene = scene.instance()
 	level_container_viewport.add_child(new_scene)
+	# Give player anything they were holding on load
+	for item in held_items:
+		var new_player_items_branch = level_container_viewport.get_node("OverworldLevel/Entities/Player/Hand")
+		new_player_items_branch.add_child(item)
 
-
-#func load_world(new_world_scene: PackedScene):
-#	# unload currently loaded world if it exists
-#	if current_world:
-#		remove_child(current_world)
-#		current_world.queue_free()
-#		current_world = null
-#	current_world = new_world_scene.instance()
-#	add_child(current_world)
-
-#func unload_existing_level():
-#	for child in level_container_viewport.get_children():
-#		print(child)
-#		child.queue_free()
