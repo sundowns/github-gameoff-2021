@@ -1,17 +1,16 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://world/levels/BaseLevelOverworld.tscn" type="PackedScene" id=1]
 [ext_resource path="res://world/environments/bright_world_environment.tres" type="Environment" id=2]
 [ext_resource path="res://world/OverworldTransitionZone.tscn" type="PackedScene" id=3]
+[ext_resource path="res://materials/floorboard.tres" type="Material" id=4]
+[ext_resource path="res://world/props/TreeGreen.tscn" type="PackedScene" id=5]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 100, 1, 30 )
 
 [sub_resource type="CubeMesh" id=2]
 size = Vector3( 200, 2, 60 )
-
-[sub_resource type="SpatialMaterial" id=3]
-albedo_color = Color( 0.129412, 0.0862745, 0.00784314, 1 )
 
 [node name="OverworldLevel" instance=ExtResource( 1 )]
 
@@ -23,7 +22,28 @@ shape = SubResource( 1 )
 
 [node name="MeshInstance" parent="StaticObjects/Floor" index="1"]
 mesh = SubResource( 2 )
-material/0 = SubResource( 3 )
+material/0 = ExtResource( 4 )
+
+[node name="TreeGreen" parent="StaticObjects" index="5" instance=ExtResource( 5 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -3.74762, 0.808128, -4.95253 )
+
+[node name="TreeGreen2" parent="StaticObjects" index="6" instance=ExtResource( 5 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, 2.15105, 0.808128, -8.22178 )
+
+[node name="TreeGreen3" parent="StaticObjects" index="7" instance=ExtResource( 5 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, 2.15105, 0.808128, 1.4304 )
+
+[node name="TreeGreen4" parent="StaticObjects" index="8" instance=ExtResource( 5 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -2.49936, 0.808128, 2.7988 )
+
+[node name="TreeGreen5" parent="StaticObjects" index="9" instance=ExtResource( 5 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -9.32099, 0.808128, 2.7988 )
+
+[node name="TreeGreen6" parent="StaticObjects" index="10" instance=ExtResource( 5 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -11.6106, 0.808128, -2.12934 )
+
+[node name="TreeGreen7" parent="StaticObjects" index="11" instance=ExtResource( 5 )]
+transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -7.98156, 0.808128, -9.00252 )
 
 [node name="OverworldTransitionZone" parent="Triggers" index="0" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -5.56596, 0, 0 )

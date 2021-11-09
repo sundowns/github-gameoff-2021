@@ -4,6 +4,7 @@
 [ext_resource path="res://world/environments/dark_world_environment.tres" type="Environment" id=2]
 [ext_resource path="res://narrative/scenes/test101.gd" type="Script" id=3]
 [ext_resource path="res://world/OverworldTransitionZone.tscn" type="PackedScene" id=4]
+[ext_resource path="res://materials/grass.tres" type="Material" id=5]
 [ext_resource path="res://world/props/Tent.tscn" type="PackedScene" id=8]
 [ext_resource path="res://world/Wall.tscn" type="PackedScene" id=9]
 [ext_resource path="res://world/ToggleableSpotLight.tscn" type="PackedScene" id=10]
@@ -17,56 +18,53 @@
 [ext_resource path="res://world/props/Tree.tscn" type="PackedScene" id=18]
 [ext_resource path="res://world/props/TreeGreen.tscn" type="PackedScene" id=19]
 
-[sub_resource type="BoxShape" id=18]
+[sub_resource type="BoxShape" id=1]
 extents = Vector3( 100, 1, 30 )
 
-[sub_resource type="CubeMesh" id=19]
+[sub_resource type="CubeMesh" id=2]
 size = Vector3( 200, 2, 60 )
 
-[sub_resource type="SpatialMaterial" id=20]
-albedo_color = Color( 0.129412, 0.0862745, 0.00784314, 1 )
-
-[sub_resource type="CubeMesh" id=15]
+[sub_resource type="CubeMesh" id=3]
 size = Vector3( 0.4, 6, 0.4 )
 
-[sub_resource type="SpatialMaterial" id=16]
+[sub_resource type="SpatialMaterial" id=4]
 albedo_color = Color( 0.415686, 0.415686, 0.415686, 1 )
 
-[sub_resource type="CubeMesh" id=17]
+[sub_resource type="CubeMesh" id=5]
 size = Vector3( 1.5, 0.25, 1.5 )
 
-[sub_resource type="SpatialMaterial" id=4]
+[sub_resource type="SpatialMaterial" id=6]
 albedo_color = Color( 0.192157, 0.192157, 0.192157, 1 )
 
-[sub_resource type="BoxShape" id=5]
+[sub_resource type="BoxShape" id=7]
 extents = Vector3( 0.2, 1.5, 0.2 )
 
-[sub_resource type="CubeMesh" id=6]
+[sub_resource type="CubeMesh" id=8]
 size = Vector3( 8, 0.5, 8 )
 
-[sub_resource type="SpatialMaterial" id=7]
+[sub_resource type="SpatialMaterial" id=9]
 vertex_color_use_as_albedo = true
 albedo_color = Color( 1, 0.705882, 0.14902, 1 )
 
-[sub_resource type="BoxShape" id=8]
+[sub_resource type="BoxShape" id=10]
 extents = Vector3( 4, 0.25, 4 )
 
-[sub_resource type="CubeMesh" id=9]
+[sub_resource type="CubeMesh" id=11]
 size = Vector3( 4, 0.5, 4 )
 
-[sub_resource type="BoxShape" id=10]
+[sub_resource type="BoxShape" id=12]
 extents = Vector3( 2, 0.25, 2 )
 
-[sub_resource type="CubeMesh" id=11]
+[sub_resource type="CubeMesh" id=13]
 size = Vector3( 1, 0.5, 1 )
 
-[sub_resource type="BoxShape" id=12]
+[sub_resource type="BoxShape" id=14]
 extents = Vector3( 0.5, 0.25, 0.5 )
 
-[sub_resource type="BoxShape" id=13]
+[sub_resource type="BoxShape" id=15]
 extents = Vector3( 0.7, 0.5, 0.7 )
 
-[sub_resource type="BoxShape" id=14]
+[sub_resource type="BoxShape" id=16]
 extents = Vector3( 0.7, 1, 0.7 )
 
 [node name="OverworldLevel" instance=ExtResource( 1 )]
@@ -84,17 +82,17 @@ wait_time = 0.5
 script = ExtResource( 3 )
 
 [node name="ToggleableOmniLight" parent="Lights" index="1" instance=ExtResource( 13 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 7.39182, -5 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 7.39182, -12.5914 )
 light_color = Color( 1, 0.937255, 0.823529, 1 )
 omni_range = 13.9
 start_on = true
 
 [node name="CollisionShape" parent="StaticObjects/Floor" index="0"]
-shape = SubResource( 18 )
+shape = SubResource( 1 )
 
 [node name="MeshInstance" parent="StaticObjects/Floor" index="1"]
-mesh = SubResource( 19 )
-material/0 = SubResource( 20 )
+mesh = SubResource( 2 )
+material/0 = ExtResource( 5 )
 
 [node name="TreeGreen3" parent="StaticObjects" index="5" instance=ExtResource( 19 )]
 transform = Transform( 3, 0, 0, 0, 3, 0, 0, 0, 1, -15, 1, 1 )
@@ -108,17 +106,17 @@ collision_mask = 0
 
 [node name="Post" type="MeshInstance" parent="StaticObjects/Lamp" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.78215, 0 )
-mesh = SubResource( 15 )
-material/0 = SubResource( 16 )
+mesh = SubResource( 3 )
+material/0 = SubResource( 4 )
 
 [node name="LampTop" type="MeshInstance" parent="StaticObjects/Lamp" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6603, 0 )
-mesh = SubResource( 17 )
-material/0 = SubResource( 4 )
+mesh = SubResource( 5 )
+material/0 = SubResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticObjects/Lamp" index="2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5606, 0 )
-shape = SubResource( 5 )
+shape = SubResource( 7 )
 
 [node name="ToggleableSpotLight" parent="StaticObjects/Lamp" index="3" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 0.149432, 0.988772, 0, -0.988772, 0.149432, 0, 4.87284, 0.875315 )
@@ -128,19 +126,19 @@ spot_angle = 60.0
 start_on = true
 
 [node name="Wall5" parent="StaticObjects" index="8" instance=ExtResource( 9 )]
-transform = Transform( 1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -2, 2, -4 )
+transform = Transform( 1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -2, 2, -15.6623 )
 
 [node name="Wall6" parent="StaticObjects" index="9" instance=ExtResource( 9 )]
-transform = Transform( 1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 1, 2, -4 )
+transform = Transform( 1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 1, 2, -15.6623 )
 
 [node name="Wall8" parent="StaticObjects" index="10" instance=ExtResource( 9 )]
-transform = Transform( 1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 4, 2, -4 )
+transform = Transform( 1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 4, 2, -15.6623 )
 
 [node name="Wall9" parent="StaticObjects" index="11" instance=ExtResource( 9 )]
-transform = Transform( 1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 3, 2, -7 )
+transform = Transform( 1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 3, 2, -18.6623 )
 
 [node name="Wall10" parent="StaticObjects" index="12" instance=ExtResource( 9 )]
-transform = Transform( 1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -1, 2, -7 )
+transform = Transform( 1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, -1, 2, -18.6623 )
 
 [node name="Wall11" parent="StaticObjects" index="13" instance=ExtResource( 9 )]
 transform = Transform( 1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 16, 2, 2 )
@@ -163,12 +161,12 @@ collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticObjects/Wall7" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
-mesh = SubResource( 6 )
-material/0 = SubResource( 7 )
+mesh = SubResource( 8 )
+material/0 = SubResource( 9 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticObjects/Wall7" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
-shape = SubResource( 8 )
+shape = SubResource( 10 )
 
 [node name="Wall13" type="StaticBody" parent="StaticObjects" index="19"]
 transform = Transform( -5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, 8, 0.5, 4 )
@@ -176,12 +174,12 @@ collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticObjects/Wall13" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
-mesh = SubResource( 9 )
-material/0 = SubResource( 7 )
+mesh = SubResource( 11 )
+material/0 = SubResource( 9 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticObjects/Wall13" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
-shape = SubResource( 10 )
+shape = SubResource( 12 )
 
 [node name="Wall14" type="StaticBody" parent="StaticObjects" index="20"]
 transform = Transform( -5.96046e-08, 0, 1, 0, 1, 0, -1, 0, -5.96046e-08, 8, 1, 4 )
@@ -189,12 +187,12 @@ collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="StaticObjects/Wall14" index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
-mesh = SubResource( 11 )
-material/0 = SubResource( 7 )
+mesh = SubResource( 13 )
+material/0 = SubResource( 9 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticObjects/Wall14" index="1"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0 )
-shape = SubResource( 12 )
+shape = SubResource( 14 )
 
 [node name="Prop" parent="StaticObjects" index="21" instance=ExtResource( 12 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.509044, -2 )
@@ -252,27 +250,31 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, 4 )
 reactivation_lockout = 0.0
 
 [node name="CollisionShape" parent="Triggers/PlayerDetectionArea" index="0"]
-shape = SubResource( 13 )
+shape = SubResource( 15 )
 
 [node name="PlayerDetectionArea2" parent="Triggers" index="1" instance=ExtResource( 14 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.42161, 0.566033, 3.49321 )
 
 [node name="CollisionShape" parent="Triggers/PlayerDetectionArea2" index="0"]
-shape = SubResource( 13 )
+shape = SubResource( 15 )
 
 [node name="InteractableArea" parent="Triggers" index="2" instance=ExtResource( 15 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.40468, 0.210079, 3.45115 )
 
 [node name="CollisionShape" parent="Triggers/InteractableArea" index="0"]
-shape = SubResource( 14 )
+shape = SubResource( 16 )
 
 [node name="DroppedItem" parent="Triggers" index="3" instance=ExtResource( 11 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0195807, 4.17307 )
 activate_after = 1.0
 
 [node name="OverworldTransitionZone" parent="Triggers" index="4" instance=ExtResource( 4 )]
-transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -9.11765, 0, -9.16615 )
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.26195, 0, -10.998 )
 destination_scene = "res://world/levels/Testing102.tscn"
+
+[node name="OverworldTransitionZone2" parent="Triggers" index="5" instance=ExtResource( 4 )]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.28651, 0, -10.998 )
+destination_scene = "res://world/levels/Testing103.tscn"
 
 [node name="DaddysLittleAnchor" parent="CameraAnchors" index="0" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0228238, 0.25, 4.51849 )

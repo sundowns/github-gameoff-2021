@@ -7,7 +7,8 @@ signal movement_tween_finished
 
 enum MovementMode {
 	FOLLOW = 0,
-	TWEEN = 1
+	TWEEN = 1,
+	STATIC = 2
 }
 var current_mode: int = MovementMode.FOLLOW
 
@@ -22,6 +23,8 @@ func _physics_process(delta: float) -> void:
 			._physics_process(delta)
 		MovementMode.TWEEN:
 			pass # Do nothing, the tween will handle it
+		MovementMode.STATIC:
+			pass # Do nothing, nothing will handle it ;)
 
 func tween_between_positions(from: Spatial, to: Spatial, duration, transition_type, ease_type):
 	current_mode = MovementMode.TWEEN
@@ -47,3 +50,8 @@ func _on_pause_changed(is_paused: bool):
 	else:
 # warning-ignore:return_value_discarded
 		tween.resume_all()
+
+func make_static():
+	current_mode = MovementMode.STATIC
+	target = null
+	tween.stop_all()

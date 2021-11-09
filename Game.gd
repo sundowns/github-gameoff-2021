@@ -8,7 +8,7 @@ onready var loading_camera: Camera = $ViewportContainer/Viewport/LoadingCamera
 func _ready():
 	level_placeholder.call_deferred("load_start_level")
 	Global.register_levelchange_subscriber(self, "change_overworld_level")
-#	loading_animation_player.play_backwards("WorldSlideOut")
+	loading_animation_player.play_backwards("FadeToBlack")
 
 func change_overworld_level(scene: PackedScene):
 	var held_items = []
@@ -17,11 +17,12 @@ func change_overworld_level(scene: PackedScene):
 		var player_node = world_anchor.get_node("OverworldLevel/Entities/Player")
 		player_node.freeze()
 		var overworld_camera: Camera = world_anchor.get_node("OverworldLevel/Camera")
-		loading_camera.global_transform = overworld_camera.global_transform
-		loading_camera.rotation = overworld_camera.rotation
-		loading_camera.visible = true
-		loading_camera.make_current()
-		loading_animation_player.play("WorldSlideOut")
+		overworld_camera.make_static()
+#		loading_camera.global_transform.origin = overworld_camera.global_transform.origin - world_anchor.global_transform.origin
+#		loading_camera.rotation = overworld_camera.rotation
+#		loading_camera.visible = true
+#		loading_camera.make_current()
+		loading_animation_player.play("FadeToBlack")
 		yield(loading_animation_player, "animation_finished")
 		# Grab anything the player is holding and remove from the tree
 		var player_items_branch = player_node.get_node("Hand")
@@ -41,5 +42,7 @@ func change_overworld_level(scene: PackedScene):
 	var overworld_camera: Camera = world_anchor.get_node("OverworldLevel/Camera")
 	overworld_camera.make_current()
 	loading_camera.visible = false
-	loading_animation_player.play_backwards("WorldSlideOut")
+	loading_animation_player.play_backwards("FadeToBlack")
 	yield(loading_animation_player,"animation_finished")
+
+#func load
