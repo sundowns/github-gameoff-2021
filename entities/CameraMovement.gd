@@ -54,4 +54,5 @@ func _on_pause_changed(is_paused: bool):
 func make_static():
 	current_mode = MovementMode.STATIC
 	target = null
+# warning-ignore:return_value_discarded
 	tween.stop_all()

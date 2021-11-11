@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://narrative/SceneNarrative.gd" type="Script" id=1]
+[ext_resource path="res://world/PlayerSpawnPoint.tscn" type="PackedScene" id=2]
 [ext_resource path="res://world/Overworld.gd" type="Script" id=3]
 [ext_resource path="res://entities/CameraMovement.gd" type="Script" id=5]
 [ext_resource path="res://entities/OffsetFollower.gd" type="Script" id=6]
@@ -8,9 +9,6 @@
 [ext_resource path="res://world/environments/bright_world_environment.tres" type="Environment" id=8]
 [ext_resource path="res://narrative/SceneNarrativeHandler.gd" type="Script" id=9]
 [ext_resource path="res://world/MouseDetectionLayer.tscn" type="PackedScene" id=12]
-[ext_resource path="res://entities/TinyTimmy.tscn" type="PackedScene" id=15]
-[ext_resource path="res://entities/LilJimmy.tscn" type="PackedScene" id=18]
-[ext_resource path="res://player/Player.tscn" type="PackedScene" id=20]
 
 [sub_resource type="Animation" id=1]
 resource_name = "SpinThing"
@@ -43,7 +41,7 @@ world_env = ExtResource( 8 )
 transform = Transform( 1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 2.96047, 6 )
 current = true
 script = ExtResource( 5 )
-follow_target_path = NodePath("../Entities/Player")
+follow_target_path = NodePath("")
 offset = Vector3( 0, 2.96, 6 )
 
 [node name="Tween" type="Tween" parent="Camera"]
@@ -53,7 +51,6 @@ script = ExtResource( 9 )
 
 [node name="StartDelay" type="Timer" parent="SceneNarrativeHandler"]
 one_shot = true
-autostart = true
 
 [node name="Narrative" type="Node" parent="SceneNarrativeHandler"]
 script = ExtResource( 1 )
@@ -63,15 +60,7 @@ anims/SpinThing = SubResource( 1 )
 
 [node name="Entities" type="Node" parent="."]
 
-[node name="Player" parent="Entities" instance=ExtResource( 20 )]
-
-[node name="TinyTimmy" parent="Entities" instance=ExtResource( 15 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0 )
-follow_target_path = NodePath("../LilJimmy")
-
-[node name="LilJimmy" parent="Entities" instance=ExtResource( 18 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
-follow_target_path = NodePath("../Player")
+[node name="PlayerSpawnPoint" parent="Entities" instance=ExtResource( 2 )]
 
 [node name="Lights" type="Node" parent="."]
 
@@ -84,7 +73,7 @@ spot_attenuation = 5.85634
 spot_angle = 12.5
 spot_angle_attenuation = 0.353553
 script = ExtResource( 6 )
-follow_target_path = NodePath("../../Entities/Player")
+follow_target_path = NodePath("")
 smooth_speed = 7.0
 offset = Vector3( 0, 5.2, 2.8 )
 
@@ -133,5 +122,4 @@ __meta__ = {
 [node name="CameraAnchors" type="Node" parent="."]
 
 [connection signal="tween_all_completed" from="Camera/Tween" to="Camera" method="_on_Tween_tween_all_completed"]
-[connection signal="cutscene_mode_changed" from="SceneNarrativeHandler" to="Entities/Player" method="_on_SceneNarrativeHandler_cutscene_mode_changed"]
 [connection signal="timeout" from="SceneNarrativeHandler/StartDelay" to="SceneNarrativeHandler" method="_on_StartDelay_timeout"]

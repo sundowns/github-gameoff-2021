@@ -1,8 +1,10 @@
 extends Spatial
 
 onready var camera: Camera = $Camera
+onready var player_spawn_point: PlayerSpawnPoint = $Entities/PlayerSpawnPoint
+onready var narrative_handler: SceneNarrativeHandler = $SceneNarrativeHandler
 
-onready var player = $Entities/Player
+var player: Player = null
 
 const mouse_look_ray_length := 10000
 
@@ -10,6 +12,13 @@ export(int, LAYERS_3D_PHYSICS) var mouse_collision_mask
 
 func _ready():
 	call_deferred('connect_signals')
+	call_deferred('setup_scene')
+
+func setup_scene():
+	player = player_spawn_point.spawn()
+	camera.set_follow_target(player)
+	yield(player_spawn_point, "spawned")
+	narrative_handler.start()
 
 func _physics_process(_delta: float) -> void:
 	if player and not player.is_frozen:

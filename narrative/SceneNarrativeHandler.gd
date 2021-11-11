@@ -5,6 +5,7 @@ signal cutscene_mode_changed(is_enabled)
 
 onready var narrative = $Narrative
 onready var animation_player: AnimationPlayer = $AnimationPlayer
+onready var start_delay_timer: Timer = $StartDelay
 
 export(bool) var narrative_disabled := false
 export(bool) var callbacks_disabled := false
@@ -20,6 +21,9 @@ func clear_all_speech_bubbles():
 func register_new_speech_bubble(new_bubble):
 	# Add new bubble to the reference map
 	current_speech_bubbles[new_bubble.character_name] = new_bubble
+
+func start():
+	start_delay_timer.start()
 
 func _on_StartDelay_timeout() -> void:
 	run_scene_script()

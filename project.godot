@@ -54,6 +54,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://player/Player.gd"
 }, {
+"base": "Position3D",
+"class": "PlayerSpawnPoint",
+"language": "GDScript",
+"path": "res://world/PlayerSpawnPoint.gd"
+}, {
 "base": "Node",
 "class": "SceneNarrative",
 "language": "GDScript",
@@ -84,6 +89,7 @@ _global_script_class_icons={
 "Item": "",
 "OffsetFollower": "",
 "Player": "",
+"PlayerSpawnPoint": "",
 "SceneNarrative": "",
 "SceneNarrativeHandler": "",
 "SpeechBubble": "",

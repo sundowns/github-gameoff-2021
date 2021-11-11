@@ -6,7 +6,7 @@
 [ext_resource path="res://world/LevelPlaceHolder.gd" type="Script" id=4]
 [ext_resource path="res://world/levels/Testing101.tscn" type="PackedScene" id=5]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 resource_name = "FadeToBlack"
 length = 0.7
 tracks/0/type = "value"
@@ -59,4 +59,4 @@ start_level = ExtResource( 5 )
 [node name="LoadingCamera" type="Camera" parent="ViewportContainer/Viewport"]
 
 [node name="LoadingAnimationPlayer" type="AnimationPlayer" parent="."]
-anims/FadeToBlack = SubResource( 3 )
+anims/FadeToBlack = SubResource( 1 )

@@ -9,7 +9,18 @@ export var smooth_speed: float = 3.0
 export var offset: Vector3
 
 func _ready():
-	set_follow_target(get_node(follow_target_path))
+	if not look_for_target():
+		push_warning("Node did not exist at path: '%s' in OffsetFollower _ready()" % follow_target_path)
+		call_deferred("look_for_target")
+
+func look_for_target() -> bool:
+	var node = get_node_or_null(follow_target_path)
+	if node:
+		set_follow_target(node)
+		print('found em')
+		return true
+	else:
+		return false
 
 func set_follow_target(_target: Node):
 	target = _target
