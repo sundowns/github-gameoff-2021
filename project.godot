@@ -104,7 +104,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Global="*res://world/Global.gd"
+Global="*res://global/Global.gd"
+NarrativeState="*res://global/NarrativeState.gd"
 
 [display]
 

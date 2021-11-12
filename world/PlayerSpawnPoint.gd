@@ -5,8 +5,6 @@ export(PackedScene) var scene: PackedScene = preload("res://player/Player.tscn")
 
 signal spawned
 
-func _ready():
-	spawn()
 
 func spawn():
 	var new_spawned = scene.instance()

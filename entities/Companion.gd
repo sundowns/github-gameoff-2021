@@ -22,11 +22,9 @@ export(float) var speed := 6.0
 export(float) var catchup_speed := 8.0
 export(float) var gravity := 30.0
 
-func _ready():
-	var target = get_node(follow_target_path)
-	if target:
-		follow_target = target
-		is_following = true
+func set_target(_target: Node):
+	follow_target = _target
+	is_following = true
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():

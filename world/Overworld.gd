@@ -14,11 +14,33 @@ func _ready():
 	call_deferred('connect_signals')
 	call_deferred('setup_scene')
 
+const companion_spawn_offset_distance := 2.0
+const companion_spawn_directions := [Vector2.UP,Vector2.RIGHT,Vector2.DOWN,Vector2.LEFT]
+
 func setup_scene():
-	player = player_spawn_point.spawn()
-	camera.set_follow_target(player)
+	player_spawn_point.spawn()
 	yield(player_spawn_point, "spawned")
+	player = get_node("Entities/Player")
+	# Spawn companions - iterate through the offset directions, so they spawn around a player atm
+	spawn_current_companions()
+	camera.set_follow_target(player)
+	
+	yield(get_tree().create_timer(0.5), "timeout")
 	narrative_handler.start()
+
+func spawn_current_companions():
+	assert(player != null, "Where my spawned player at??????????")
+	var direction_array_index := 0 
+	var target_to_follow = player
+	for companion_key in NarrativeState.current_companions:
+		var companion_data = NarrativeState.all_companions[companion_key]
+		var direction = companion_spawn_directions[direction_array_index]
+		direction_array_index += 1
+		var companion = load(companion_data.scene_path).instance()
+		get_node("Entities").add_child(companion)
+		companion.global_transform.origin = player.global_transform.origin + Vector3(direction.x, 0, direction.y) * companion_spawn_offset_distance
+		companion.set_target(target_to_follow)
+		target_to_follow = companion
 
 func _physics_process(_delta: float) -> void:
 	if player and not player.is_frozen:

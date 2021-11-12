@@ -17,7 +17,7 @@ func _ready():
 	call_deferred("connect_signals")
 
 func connect_signals():
-	var narrative_handler = get_tree().current_scene.get_node(Global.narrative_handler_scenepath)
+	var narrative_handler = get_tree().current_scene.get_node(NarrativeState.narrative_handler_scenepath)
 # warning-ignore:return_value_discarded
 	connect("picked_up", narrative_handler, "item_pickup", [], CONNECT_DEFERRED)
 # warning-ignore:return_value_discarded

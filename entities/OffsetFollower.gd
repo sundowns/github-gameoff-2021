@@ -8,22 +8,25 @@ onready var target: Node
 export var smooth_speed: float = 3.0
 export var offset: Vector3
 
-func _ready():
-	if not look_for_target():
-		push_warning("Node did not exist at path: '%s' in OffsetFollower _ready()" % follow_target_path)
-		call_deferred("look_for_target")
+# warning-ignore:unused_signal
+signal target_changed(target)
 
-func look_for_target() -> bool:
+func _ready():
+	# Lazy but ceebs
+	yield(get_tree().create_timer(1.0), "timeout")
+	call_deferred("look_for_target")
+
+func look_for_target():
 	var node = get_node_or_null(follow_target_path)
 	if node:
 		set_follow_target(node)
 		print('found em')
-		return true
 	else:
-		return false
+		push_warning("Node did not exist at path: '%s' in OffsetFollower _ready()" % follow_target_path)
 
 func set_follow_target(_target: Node):
 	target = _target
+	call_deferred("emit_signal", "target_changed", target)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:

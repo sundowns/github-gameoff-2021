@@ -6,8 +6,6 @@ var is_debug := true
 signal pause_changed(is_paused)
 signal overworld_level_changed(new_level)
 
-const narrative_handler_scenepath := "ViewportContainer/Viewport/WorldAnchor/OverworldLevel/SceneNarrativeHandler"
-
 func register_pause_subscriber(subscriber: Node, function_name: String):
 # warning-ignore:return_value_discarded
 	connect("pause_changed", subscriber, function_name, [], CONNECT_DEFERRED)

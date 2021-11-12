@@ -83,6 +83,7 @@ func pickup_item(item: Node):
 	emit_signal("item_picked_up")
 
 func _on_SceneNarrativeHandler_cutscene_mode_changed(is_enabled) -> void:
+	print('cutscene: %s' % is_enabled)
 	is_frozen = is_enabled
 
 func freeze():
