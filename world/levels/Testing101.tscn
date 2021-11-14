@@ -81,9 +81,6 @@ wait_time = 0.5
 [node name="Narrative" parent="SceneNarrativeHandler" index="1"]
 script = ExtResource( 3 )
 
-[node name="SpotLight" parent="Lights" index="0"]
-follow_target_path = "Entities/Player"
-
 [node name="ToggleableOmniLight" parent="Lights" index="1" instance=ExtResource( 13 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 7.39182, -12.5914 )
 light_color = Color( 1, 0.937255, 0.823529, 1 )

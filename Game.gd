@@ -18,10 +18,6 @@ func change_overworld_level(scene: PackedScene):
 		player_node.freeze()
 		var overworld_camera: Camera = world_anchor.get_node("OverworldLevel/Camera")
 		overworld_camera.make_static()
-#		loading_camera.global_transform.origin = overworld_camera.global_transform.origin - world_anchor.global_transform.origin
-#		loading_camera.rotation = overworld_camera.rotation
-#		loading_camera.visible = true
-#		loading_camera.make_current()
 		loading_animation_player.play("FadeToBlack")
 		yield(loading_animation_player, "animation_finished")
 		# Grab anything the player is holding and remove from the tree
@@ -32,8 +28,9 @@ func change_overworld_level(scene: PackedScene):
 		world_anchor.remove_child(existing_overworld)
 		existing_overworld.queue_free()
 	
-	var new_scene = scene.instance()
+	var new_scene: OverworldScene = scene.instance()
 	world_anchor.add_child(new_scene)
+	yield(new_scene, "scene_initialised")
 	# Give player anything they were holding on load
 	for item in held_items:
 		var new_player_items_branch = world_anchor.get_node("OverworldLevel/Entities/Player/Hand")

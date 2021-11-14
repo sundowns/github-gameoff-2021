@@ -29,7 +29,7 @@ extents = Vector3( 100, 40, 1 )
 [sub_resource type="PlaneMesh" id=6]
 size = Vector2( 5000, 150 )
 
-[node name="OverworldLevel" type="Spatial"]
+[node name="OverworldLevel2" type="Spatial"]
 script = ExtResource( 3 )
 mouse_collision_mask = 32
 

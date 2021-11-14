@@ -3,7 +3,7 @@ class_name OffsetFollower
 
 # Extended from https://github.com/AhmedHamdi1234/Smooth-Camera-Follow-Godot-Demo/blob/main/Scripts/Camera_Follow.gd
 
-export(String) var follow_target_path: String = "../Entities/Player"
+export(String) var follow_target_path: String = "Entities/Player"
 onready var target: Node
 export var smooth_speed: float = 3.0
 export var offset: Vector3

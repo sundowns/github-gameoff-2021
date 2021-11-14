@@ -1,4 +1,5 @@
 extends Spatial
+class_name OverworldScene
 
 onready var camera: Camera = $Camera
 onready var player_spawn_point: PlayerSpawnPoint = $Entities/PlayerSpawnPoint
@@ -9,6 +10,8 @@ var player: Player = null
 const mouse_look_ray_length := 10000
 
 export(int, LAYERS_3D_PHYSICS) var mouse_collision_mask
+
+signal scene_initialised
 
 func _ready():
 	call_deferred('connect_signals')
@@ -23,6 +26,7 @@ func setup_scene():
 	player = get_node("Entities/Player")
 	# Spawn companions - iterate through the offset directions, so they spawn around a player atm
 	spawn_current_companions()
+# warning-ignore:return_value_discarded
 	narrative_handler.connect("cutscene_mode_changed", player, "_on_SceneNarrativeHandler_cutscene_mode_changed")
 	camera.set_follow_target(player)
 	
@@ -34,6 +38,7 @@ func setup_scene():
 			light.look_for_target()
 
 	yield(get_tree().create_timer(0.05), "timeout")
+	emit_signal("scene_initialised")
 	narrative_handler.start()
 
 func spawn_current_companions():
