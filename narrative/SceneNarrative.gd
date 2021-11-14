@@ -90,6 +90,9 @@ var universal_callbacks = {
 		],
 	"_flashlight_pickup": [
 		ItemPickup.new("res://items/Flashlight.tscn")
+	],
+	"_bugspray_pickup": [
+		ItemPickup.new("res://items/BugSpray.tscn")
 	]
 }
 
