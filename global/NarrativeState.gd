@@ -21,7 +21,7 @@ var all_companions := {
 	"timmy": PlayerCompanion.new("timmy", "res://entities/TinyTimmy.tscn")
 }
 
-var current_companions = ["jimmy", "timmy"]
+var current_companions = ["timmy"]
 
 func add_companion(companion_key: String):
 	for current in current_companions:

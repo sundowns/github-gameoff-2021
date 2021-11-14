@@ -41,7 +41,6 @@ world_env = ExtResource( 8 )
 transform = Transform( 1, 0, 0, 0, 0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 2.96047, 6 )
 current = true
 script = ExtResource( 5 )
-follow_target_path = NodePath("")
 offset = Vector3( 0, 2.96, 6 )
 
 [node name="Tween" type="Tween" parent="Camera"]
@@ -73,7 +72,6 @@ spot_attenuation = 5.85634
 spot_angle = 12.5
 spot_angle_attenuation = 0.353553
 script = ExtResource( 6 )
-follow_target_path = NodePath("")
 smooth_speed = 7.0
 offset = Vector3( 0, 5.2, 2.8 )
 

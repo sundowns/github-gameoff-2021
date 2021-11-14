@@ -1,5 +1,7 @@
 extends Node
 
+const overworld_node_scenepath := "ViewportContainer/Viewport/WorldAnchor/OverworldLevel"
+
 var is_paused := false
 var is_debug := true
 
