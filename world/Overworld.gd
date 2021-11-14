@@ -15,15 +15,16 @@ signal scene_initialised
 
 func _ready():
 	call_deferred('connect_signals')
-	call_deferred('setup_scene')
 
 const companion_spawn_offset_distance := 2.0
 const companion_spawn_directions := [Vector2.UP,Vector2.RIGHT,Vector2.DOWN,Vector2.LEFT]
 
-func setup_scene():
+func setup_scene(spawn_zone_key: String = ""):
 	player_spawn_point.spawn()
 	yield(player_spawn_point, "spawned")
 	player = get_node("Entities/Player")
+	if spawn_zone_key != "":
+		move_player_to_transition_zone(spawn_zone_key)
 	# Spawn companions - iterate through the offset directions, so they spawn around a player atm
 	spawn_current_companions()
 # warning-ignore:return_value_discarded
@@ -74,3 +75,11 @@ func connect_signals():
 
 func _on_pause_changed(new_value):
 	get_tree().paused = new_value
+
+func move_player_to_transition_zone(transition_zone_key: String):
+	if not player:
+		return
+	for trigger in $Triggers.get_children():
+		if trigger is OverworldTransitionZone:
+			if trigger.key == transition_zone_key:
+				player.global_transform.origin = trigger.spawn_position.global_transform.origin

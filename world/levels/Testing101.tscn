@@ -272,9 +272,15 @@ activate_after = 1.0
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 6.26195, 0, -10.998 )
 destination_scene = "res://world/levels/Testing102.tscn"
 
+[node name="SpawnPosition" parent="Triggers/OverworldTransitionZone" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.06, 0, 0 )
+
 [node name="OverworldTransitionZone2" parent="Triggers" index="5" instance=ExtResource( 4 )]
 transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4.28651, 0, -10.998 )
 destination_scene = "res://world/levels/Testing103.tscn"
+
+[node name="SpawnPosition" parent="Triggers/OverworldTransitionZone2" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79, 0, 0 )
 
 [node name="DaddysLittleAnchor" parent="CameraAnchors" index="0" instance=ExtResource( 16 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0228238, 0.25, 4.51849 )
@@ -290,3 +296,5 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10.4777, 3.83932, 3.407 )
 [editable path="Triggers/PlayerDetectionArea"]
 [editable path="Triggers/PlayerDetectionArea2"]
 [editable path="Triggers/InteractableArea"]
+[editable path="Triggers/OverworldTransitionZone"]
+[editable path="Triggers/OverworldTransitionZone2"]

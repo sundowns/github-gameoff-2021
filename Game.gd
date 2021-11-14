@@ -10,7 +10,7 @@ func _ready():
 	Global.register_levelchange_subscriber(self, "change_overworld_level")
 	loading_animation_player.play_backwards("FadeToBlack")
 
-func change_overworld_level(scene: PackedScene):
+func change_overworld_level(scene: PackedScene, transition_zone_key: String):
 	var held_items = []
 	var existing_overworld = world_anchor.get_child(0)
 	if existing_overworld:
@@ -30,7 +30,9 @@ func change_overworld_level(scene: PackedScene):
 	
 	var new_scene: OverworldScene = scene.instance()
 	world_anchor.add_child(new_scene)
+	new_scene.call_deferred("setup_scene", transition_zone_key)
 	yield(new_scene, "scene_initialised")
+#	new_scene.move_player_to_transition_zone(transition_zone_key)
 	# Give player anything they were holding on load
 	for item in held_items:
 		var new_player_items_branch = world_anchor.get_node("OverworldLevel/Entities/Player/Hand")
@@ -41,5 +43,5 @@ func change_overworld_level(scene: PackedScene):
 	loading_camera.visible = false
 	loading_animation_player.play_backwards("FadeToBlack")
 	yield(loading_animation_player,"animation_finished")
+	$Menu/FadeToBlack.self_modulate = "#00ffffff" # Force hide in case it no worky (happens sometimes)
 
-#func load

@@ -39,3 +39,8 @@ transform = Transform( 4, 0, 0, 0, 4, 0, 0, 0, 4, 5.79666, 0, -9.01174 )
 [node name="OverworldTransitionZone" parent="Triggers" index="0" instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.75271, 0, 0 )
 destination_scene = "res://world/levels/Testing101.tscn"
+
+[node name="SpawnPosition" parent="Triggers/OverworldTransitionZone" index="2"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.979, 0, 0 )
+
+[editable path="Triggers/OverworldTransitionZone"]

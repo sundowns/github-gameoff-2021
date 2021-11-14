@@ -28,4 +28,10 @@ visible = false
 mesh = SubResource( 2 )
 material/0 = SubResource( 3 )
 
+[node name="SpawnPosition" type="Position3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0 )
+__meta__ = {
+"_editor_description_": ""
+}
+
 [connection signal="body_entered" from="." to="." method="_on_OverworldTransitionZone_body_entered"]

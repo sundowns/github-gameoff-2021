@@ -56,3 +56,7 @@ func make_static():
 	target = null
 # warning-ignore:return_value_discarded
 	tween.stop_all()
+
+func make_current():
+	if target:
+		global_transform.origin = target.global_transform.origin + offset

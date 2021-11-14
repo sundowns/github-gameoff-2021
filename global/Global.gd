@@ -20,5 +20,5 @@ func toggle_pause():
 	is_paused = not is_paused
 	emit_signal("pause_changed", is_paused)
 
-func request_level_change(new_level: PackedScene):
-	emit_signal("overworld_level_changed", new_level)
+func request_level_change(new_level: PackedScene, transition_zone_key: String = "A1"):
+	emit_signal("overworld_level_changed", new_level, transition_zone_key)
