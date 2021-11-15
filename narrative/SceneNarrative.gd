@@ -1,6 +1,8 @@
 extends Node
 class_name SceneNarrative
 
+export(String) var scene_key := "A1"
+
 class NarrativeItem:
 	var type: String = "base"
 

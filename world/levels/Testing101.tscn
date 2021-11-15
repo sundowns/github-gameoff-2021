@@ -265,7 +265,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.40468, 0.210079, 3.45115 )
 shape = SubResource( 16 )
 
 [node name="DroppedItem" parent="Triggers" index="3" instance=ExtResource( 11 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0195807, 4.17307 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.173 )
 activate_after = 1.0
 
 [node name="OverworldTransitionZone" parent="Triggers" index="4" instance=ExtResource( 4 )]

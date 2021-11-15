@@ -77,7 +77,10 @@ func point_hand_at(to_position: Vector3):
 
 func pickup_item(item: Node):
 	for child in hand.get_children():
-		child.queue_free() # TODO: drop instead I guess
+		if child is Item:
+			child.drop()
+		else:
+			child.queue_free()
 	hand.add_child(item)
 	
 	emit_signal("item_picked_up")

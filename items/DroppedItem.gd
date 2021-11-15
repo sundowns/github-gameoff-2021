@@ -11,13 +11,37 @@ onready var interaction_area: Area = $InteractableArea
 var is_active := false
 
 func _ready():
-	timer.start(activate_after)
 	player_detect_area.monitoring = false
 	interaction_area.monitorable = false
-	call_deferred("connect_signals")
+	call_deferred("initialise")
 
-func connect_signals():
+func initialise():
 	var narrative_handler = get_tree().current_scene.get_node(NarrativeState.narrative_handler_scenepath)
+	if not narrative_handler:
+		push_error("Item failed to find narrative handler to handle spawning logic.")
+	# Lookup global world cache with our key
+	if NarrativeState.world_items_cache.has(item_key):
+		var existing_world_item = NarrativeState.world_items_cache[item_key]
+		if (not existing_world_item.scene_path == narrative_handler.narrative.scene_key) or existing_world_item.is_player_holding:
+			# If it exists and is in another area or on player, queue_free this one
+			queue_free()
+			print('dont spawn this one')
+			return
+		else:
+			# If it exists and is in this area, move it to its dropped position
+			global_transform.origin = existing_world_item.position
+			print('it belong here, moving it to position: ', existing_world_item.position)
+		pass
+	else:
+		# If it does not exist, add this entry to it 
+		print('adding to item cache')
+		NarrativeState.world_items_cache[item_key] = NarrativeState.WorldItem.new(item_key, global_transform.origin, narrative_handler.narrative.scene_key)
+	
+	timer.start(activate_after)
+	call_deferred("connect_signals", narrative_handler)
+
+func connect_signals(narrative_handler):
+#	var narrative_handler = get_tree().current_scene.get_node(NarrativeState.narrative_handler_scenepath)
 # warning-ignore:return_value_discarded
 	connect("picked_up", narrative_handler, "item_pickup", [], CONNECT_DEFERRED)
 # warning-ignore:return_value_discarded
@@ -29,6 +53,11 @@ func _on_PlayerDetectionArea_player_entered() -> void:
 
 func _on_InteractableArea_triggered() -> void:
 	if is_active:
+		var narrative_handler = get_tree().current_scene.get_node(NarrativeState.narrative_handler_scenepath)
+		if not narrative_handler:
+			push_error("Item failed to find narrative handler to handle pickup logic for world item cache.")
+		else:
+			NarrativeState.world_items_cache[item_key].picked_up()
 		emit_signal("picked_up", item_key)
 		queue_free()
 

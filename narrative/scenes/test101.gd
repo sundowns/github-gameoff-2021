@@ -1,6 +1,7 @@
 extends SceneNarrative
 
 func _ready():
+	scene_key = "test101"
 # Narrative sequences that react to something in the world - e.g. a button is pressed
 # These are triggered by signals connected to the 'SceneNarrativeHandler's 'display_callback' function.
 	scene_callbacks = {
