@@ -21,13 +21,23 @@ func initialise():
 		push_error("Item failed to find narrative handler to handle spawning logic.")
 	# Lookup global world cache with our key
 	if NarrativeState.world_items_cache.has(item_key):
+		print(item_key)
 		var existing_world_item = NarrativeState.world_items_cache[item_key]
-		if (not existing_world_item.scene_path == narrative_handler.narrative.scene_key) or existing_world_item.is_player_holding:
+		print(item_key, " , ", existing_world_item.scene_key, " , ", narrative_handler.narrative.scene_key)
+		if existing_world_item.just_dropped:
+			# If its just been dropped, allow it to spawn and unset flag 
+			existing_world_item.just_dropped = false
+			print('just dropped do nuffin')
+		elif existing_world_item.is_player_holding:
+			existing_world_item.carried_across_world(narrative_handler.narrative.scene_key)
+			queue_free()
+			print('player holding remove it')
+		elif (not existing_world_item.scene_key == narrative_handler.narrative.scene_key):
 			# If it exists and is in another area or on player, queue_free this one
 			queue_free()
 			print('dont spawn this one')
 			return
-		else:
+		elif existing_world_item.scene_key == narrative_handler.narrative.scene_key:
 			# If it exists and is in this area, move it to its dropped position
 			global_transform.origin = existing_world_item.position
 			print('it belong here, moving it to position: ', existing_world_item.position)

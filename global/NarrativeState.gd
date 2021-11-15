@@ -6,18 +6,28 @@ class WorldItem:
 	var is_player_holding: bool = false
 	var key: String
 	var position: Vector3
-	var scene_path: String
-	func _init(_key, _position, _scene_path):
+	var scene_key: String
+	var just_dropped: bool = false
+	func _init(_key, _position, _scene_key):
 		key = _key
 		position = _position
-		scene_path = _scene_path
+		scene_key = _scene_key
 		is_player_holding = false
-	func dropped():
+	func dropped(at: Vector3, _scene_key: String):
 		is_player_holding = false
+		just_dropped = true
+		position = at
+		scene_key = _scene_key
 	func picked_up():
 		is_player_holding = true
+	func carried_across_world(to_scene_key: String):
+		scene_key = to_scene_key
 # Used to check if an item has been picked up
 var world_items_cache: Dictionary = {}
+
+func item_dropped(key: String, at: Vector3):
+	var narrative_handler = get_tree().current_scene.get_node(narrative_handler_scenepath)
+	world_items_cache[key].dropped(at, narrative_handler.narrative.scene_key)
 
 class PlayerCompanion:
 	var key: String

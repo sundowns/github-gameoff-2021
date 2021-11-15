@@ -1,7 +1,6 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://world/levels/BaseLevelOverworld.tscn" type="PackedScene" id=1]
-[ext_resource path="res://world/environments/bright_world_environment.tres" type="Environment" id=2]
 [ext_resource path="res://world/OverworldTransitionZone.tscn" type="PackedScene" id=3]
 [ext_resource path="res://materials/floorboard.tres" type="Material" id=4]
 [ext_resource path="res://world/props/TreeGreen.tscn" type="PackedScene" id=5]
@@ -14,8 +13,8 @@ size = Vector3( 200, 2, 60 )
 
 [node name="OverworldLevel" instance=ExtResource( 1 )]
 
-[node name="WorldEnvironment" parent="." index="0"]
-environment = ExtResource( 2 )
+[node name="Narrative" parent="SceneNarrativeHandler" index="1"]
+scene_key = "A2"
 
 [node name="CollisionShape" parent="StaticObjects/Floor" index="0"]
 shape = SubResource( 1 )
